@@ -70,7 +70,7 @@ function Navbar() {
         </button>
 
         {/* Desktop Navigation */}
-        <div style={desktopLinksStyle}>
+        <div className="navbar-desktop-links" style={desktopLinksStyle}>
           <button
             onClick={() =>
               handleNavigate("/products")
@@ -197,6 +197,7 @@ function Navbar() {
           onClick={() =>
             setMenuOpen(!menuOpen)
           }
+          className="navbar-mobile-menu-button"
           style={mobileMenuButtonStyle}
           aria-label="Toggle navigation menu"
         >
@@ -206,7 +207,7 @@ function Navbar() {
 
       {/* Mobile Navigation */}
       {menuOpen && (
-        <div style={mobileMenuStyle}>
+        <div className="navbar-mobile-menu" style={mobileMenuStyle}>
           <button
             onClick={() =>
               handleNavigate("/products")
