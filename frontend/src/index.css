@@ -188,3 +188,198 @@ body,
     overflow-wrap: anywhere;
   }
 }
+
+
+/* ==========================================
+   Nexbuy Home - Precise Mobile Hero Fix
+   Keeps desktop styling intact while making
+   decorative/absolute hero elements stay
+   inside the phone viewport.
+========================================== */
+
+.nexbuy-home-hero,
+.nexbuy-home-promo {
+  width: 100%;
+  max-width: 100%;
+}
+
+.nexbuy-home-hero-content {
+  min-width: 0;
+}
+
+.nexbuy-home-hero-visual-wrapper {
+  min-width: 0;
+}
+
+.nexbuy-home-hero-visual {
+  max-width: 100%;
+}
+
+.nexbuy-home-floating-card {
+  max-width: min(280px, calc(100vw - 32px));
+}
+
+.nexbuy-home-promo-visual {
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .nexbuy-home-hero {
+    min-height: auto !important;
+    padding: 72px 32px 64px !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+    gap: 36px !important;
+  }
+
+  .nexbuy-home-hero-content {
+    width: 100% !important;
+    max-width: 680px !important;
+    margin: 0 auto !important;
+  }
+
+  .nexbuy-home-hero-visual-wrapper {
+    width: 100% !important;
+    flex: 0 0 auto !important;
+    justify-content: center !important;
+  }
+
+  .nexbuy-home-hero-visual {
+    width: min(360px, 82vw) !important;
+    height: min(360px, 82vw) !important;
+  }
+
+  .nexbuy-home-hero-ring-one {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .nexbuy-home-hero-ring-two {
+    width: 78% !important;
+    height: 78% !important;
+  }
+
+  .nexbuy-home-hero-product-circle {
+    width: 60% !important;
+    height: 60% !important;
+  }
+
+  .nexbuy-home-floating-card {
+    max-width: 235px !important;
+    padding: 10px 12px !important;
+  }
+
+  .nexbuy-home-floating-card-top {
+    top: 2% !important;
+    right: -2% !important;
+  }
+
+  .nexbuy-home-floating-card-bottom {
+    bottom: 2% !important;
+    left: -2% !important;
+  }
+
+  .nexbuy-home-promo {
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    width: calc(100% - 32px) !important;
+    padding: 48px 40px !important;
+  }
+
+  .nexbuy-home-promo-visual {
+    width: min(260px, 60vw) !important;
+    height: min(260px, 60vw) !important;
+  }
+
+  .nexbuy-home-promo-circle-large {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .nexbuy-home-promo-circle-medium {
+    width: 70% !important;
+    height: 70% !important;
+  }
+
+  .nexbuy-home-promo-circle-small {
+    width: 42% !important;
+    height: 42% !important;
+    font-size: clamp(32px, 8vw, 48px) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .nexbuy-home-hero {
+    padding: 48px 24px 52px !important;
+    gap: 30px !important;
+  }
+
+  .nexbuy-home-hero-content {
+    text-align: left;
+  }
+
+  .nexbuy-home-floating-card {
+    max-width: 190px !important;
+    gap: 8px !important;
+    padding: 9px 10px !important;
+    border-radius: 11px !important;
+  }
+
+  .nexbuy-home-floating-card-top {
+    top: 0 !important;
+    right: -1% !important;
+  }
+
+  .nexbuy-home-floating-card-bottom {
+    bottom: 0 !important;
+    left: -1% !important;
+  }
+
+  .nexbuy-home-promo {
+    margin-top: 12px !important;
+    margin-bottom: 48px !important;
+    padding: 40px 24px !important;
+    min-height: auto !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 28px !important;
+    border-radius: 18px !important;
+  }
+
+  .nexbuy-home-promo-visual {
+    align-self: center !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .nexbuy-home-hero {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  .nexbuy-home-hero-visual {
+    width: min(300px, 84vw) !important;
+    height: min(300px, 84vw) !important;
+  }
+
+  .nexbuy-home-floating-card {
+    max-width: 155px !important;
+    font-size: 11px !important;
+  }
+
+  .nexbuy-home-floating-card-top {
+    right: -3% !important;
+  }
+
+  .nexbuy-home-floating-card-bottom {
+    left: -3% !important;
+  }
+
+  .nexbuy-home-promo {
+    margin-left: 12px !important;
+    margin-right: 12px !important;
+    width: calc(100% - 24px) !important;
+    padding: 34px 20px !important;
+  }
+}

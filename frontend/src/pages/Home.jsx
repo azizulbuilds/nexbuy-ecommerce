@@ -50,11 +50,11 @@ function Home() {
           HERO
       ========================================== */}
 
-      <section style={heroStyle}>
+      <section className="nexbuy-home-hero" style={heroStyle}>
         <div style={heroGlowOne}></div>
         <div style={heroGlowTwo}></div>
 
-        <div style={heroContentStyle}>
+        <div className="nexbuy-home-hero-content" style={heroContentStyle}>
           <div style={heroBadgeStyle}>
             <span style={badgeDotStyle}></span>
             Modern shopping, made simple
@@ -155,18 +155,19 @@ function Home() {
         </div>
 
         {/* Hero Visual */}
-        <div style={heroVisualWrapperStyle}>
-          <div style={heroVisualStyle}>
-            <div style={visualRingOne}></div>
-            <div style={visualRingTwo}></div>
+        <div className="nexbuy-home-hero-visual-wrapper" style={heroVisualWrapperStyle}>
+          <div className="nexbuy-home-hero-visual" style={heroVisualStyle}>
+            <div className="nexbuy-home-hero-ring nexbuy-home-hero-ring-one" style={visualRingOne}></div>
+            <div className="nexbuy-home-hero-ring nexbuy-home-hero-ring-two" style={visualRingTwo}></div>
 
-            <div style={heroProductCircleStyle}>
+            <div className="nexbuy-home-hero-product-circle" style={heroProductCircleStyle}>
               <div style={shoppingBagStyle}>
                 🛍️
               </div>
             </div>
 
             <div
+              className="nexbuy-home-floating-card nexbuy-home-floating-card-top"
               style={{
                 ...floatingCardStyle,
                 ...floatingCardTopStyle,
@@ -192,6 +193,7 @@ function Home() {
             </div>
 
             <div
+              className="nexbuy-home-floating-card nexbuy-home-floating-card-bottom"
               style={{
                 ...floatingCardStyle,
                 ...floatingCardBottomStyle,
@@ -524,7 +526,7 @@ function Home() {
           PROMO SECTION
       ========================================== */}
 
-      <section style={promoSectionStyle}>
+      <section className="nexbuy-home-promo" style={promoSectionStyle}>
         <div style={promoGlowStyle}></div>
 
         <div style={promoContentStyle}>
@@ -564,8 +566,8 @@ function Home() {
           </button>
         </div>
 
-        <div style={promoVisualStyle}>
-          <div style={promoCircleLargeStyle}>
+        <div className="nexbuy-home-promo-visual" style={promoVisualStyle}>
+          <div className="nexbuy-home-promo-circle-large" style={promoCircleLargeStyle}>
             <div
               style={promoCircleMediumStyle}
             >
