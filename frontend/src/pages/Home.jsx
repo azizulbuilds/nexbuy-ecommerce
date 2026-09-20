@@ -735,31 +735,9 @@ function Home() {
             </p>
           </div>
 
-          <div style={footerLinksStyle}>
-            <Link
-              to="/products"
-              style={footerLinkStyle}
-            >
-              Products
-            </Link>
-
-            <Link
-              to="/login"
-              style={footerLinkStyle}
-            >
-              Login
-            </Link>
-
-            <Link
-              to="/register"
-              style={footerLinkStyle}
-            >
-              Register
-            </Link>
-          </div>
         </div>
 
-        <div style={footerBottomStyle}>
+        <div className="nexbuy-home-footer-bottom" style={footerBottomStyle}>
           <span>
             © 2026 Nexbuy. All rights reserved.
           </span>
@@ -1629,18 +1607,6 @@ const footerDescriptionStyle = {
   lineHeight: "1.6",
 };
 
-const footerLinksStyle = {
-  display: "flex",
-  alignItems: "flex-start",
-  gap: "20px",
-};
-
-const footerLinkStyle = {
-  color: "#cbd5e1",
-  fontSize: "12px",
-  textDecoration: "none",
-  cursor: "pointer",
-};
 
 const footerBottomStyle = {
   maxWidth: "1180px",
