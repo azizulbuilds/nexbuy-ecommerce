@@ -317,6 +317,7 @@ function VerifyOTP() {
             </label>
 
             <div
+              className="nexbuy-otp-container"
               style={otpContainerStyle}
               onPaste={handleOtpPaste}
             >
@@ -344,6 +345,7 @@ function VerifyOTP() {
                         e
                       )
                     }
+                    className="nexbuy-otp-input"
                     style={{
                       ...otpInputStyle,
                       ...(digit

@@ -462,3 +462,57 @@ body,
   }
 }
 
+/* ==========================================
+   Nexbuy OTP - Mobile Responsive Fix
+   ========================================== */
+
+.nexbuy-otp-container {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.nexbuy-otp-input {
+  flex: 0 1 56px;
+  width: 56px !important;
+  max-width: 56px;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 520px) {
+  .nexbuy-otp-container {
+    gap: clamp(4px, 2vw, 8px);
+    padding: 0 2px;
+  }
+
+  .nexbuy-otp-input {
+    width: clamp(42px, 13vw, 52px) !important;
+    height: clamp(52px, 15vw, 58px) !important;
+    max-width: none;
+    flex: 1 1 0;
+    font-size: clamp(20px, 6vw, 24px) !important;
+    border-radius: 11px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .nexbuy-otp-container {
+    gap: 4px;
+    padding: 0;
+  }
+
+  .nexbuy-otp-input {
+    width: calc((100% - 20px) / 6) !important;
+    height: 50px !important;
+    flex: 1 1 0;
+    font-size: 20px !important;
+    border-radius: 10px !important;
+  }
+}
+

@@ -1,6 +1,8 @@
 const dns = require("dns");
 
+// ==========================================
 // Change DNS
+// ==========================================
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 const express = require("express");
@@ -40,13 +42,17 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
+  "https://nexbuy-ecommerce-two.vercel.app",
   process.env.FRONTEND_URL,
-].filter(Boolean);
+]
+  .filter(Boolean)
+  .map((origin) => origin.replace(/\/$/, ""));
 
 // ==========================================
 // Middleware
 // ==========================================
 
+// CORS
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -56,20 +62,32 @@ app.use(
         return callback(null, true);
       }
 
-      if (allowedOrigins.includes(origin)) {
+      const normalizedOrigin = origin.replace(/\/$/, "");
+
+      if (allowedOrigins.includes(normalizedOrigin)) {
         return callback(null, true);
       }
 
+      console.error(
+        `CORS blocked request from origin: ${origin}`
+      );
+
       return callback(
-        new Error(`CORS policy: Origin ${origin} is not allowed`)
+        new Error(
+          `CORS policy: Origin ${origin} is not allowed`
+        )
       );
     },
+
+    // Required for HTTP-only authentication cookies
     credentials: true,
   })
 );
 
+// Parse JSON
 app.use(express.json());
 
+// Parse cookies
 app.use(cookieParser());
 
 // ==========================================
