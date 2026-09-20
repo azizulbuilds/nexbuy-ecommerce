@@ -35,12 +35,35 @@ connectDB();
 const app = express();
 
 // ==========================================
+// Allowed Frontend Origins
+// ==========================================
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
+// ==========================================
 // Middleware
 // ==========================================
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: function (origin, callback) {
+      // Allow requests without an Origin header
+      // such as Postman or server-to-server requests
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(
+        new Error(`CORS policy: Origin ${origin} is not allowed`)
+      );
+    },
     credentials: true,
   })
 );
