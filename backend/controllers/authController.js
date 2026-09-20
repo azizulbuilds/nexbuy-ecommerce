@@ -2,17 +2,13 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const {
-  sendOTPEmail,
-} = require("../utils/sendEmail");
+const { sendOTPEmail } = require("../utils/sendEmail");
 
 // ==========================================
 // Generate OTP
 // ==========================================
 const generateOTP = () => {
-  return Math.floor(
-    100000 + Math.random() * 900000
-  ).toString();
+  return Math.floor(100000 + Math.random() * 900000).toString();
 };
 
 // ==========================================
@@ -20,8 +16,7 @@ const generateOTP = () => {
 // ==========================================
 const registerUser = async (req, res) => {
   try {
-    const { name, email, password } =
-      req.body;
+    const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
       return res.status(400).json({
@@ -31,13 +26,11 @@ const registerUser = async (req, res) => {
 
     if (password.length < 6) {
       return res.status(400).json({
-        message:
-          "Password must be at least 6 characters",
+        message: "Password must be at least 6 characters",
       });
     }
 
-    const existingUser =
-      await User.findOne({ email });
+    const existingUser = await User.findOne({ email });
 
     if (existingUser) {
       return res.status(400).json({
@@ -45,8 +38,7 @@ const registerUser = async (req, res) => {
       });
     }
 
-    const hashedPassword =
-      await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const otp = generateOTP();
 
@@ -55,9 +47,7 @@ const registerUser = async (req, res) => {
       email,
       password: hashedPassword,
       otp,
-      otpExpiresAt: new Date(
-        Date.now() + 10 * 60 * 1000
-      ),
+      otpExpiresAt: new Date(Date.now() + 10 * 60 * 1000),
       isVerified: false,
     });
 
@@ -69,10 +59,7 @@ const registerUser = async (req, res) => {
       email: user.email,
     });
   } catch (error) {
-    console.error(
-      "Register Error:",
-      error
-    );
+    console.error("Register Error:", error);
 
     res.status(500).json({
       message: "Server error",
@@ -89,8 +76,7 @@ const verifyOTP = async (req, res) => {
 
     if (!email || !otp) {
       return res.status(400).json({
-        message:
-          "Email and OTP are required",
+        message: "Email and OTP are required",
       });
     }
 
@@ -106,27 +92,19 @@ const verifyOTP = async (req, res) => {
 
     if (user.isVerified) {
       return res.status(400).json({
-        message:
-          "Email is already verified",
+        message: "Email is already verified",
       });
     }
 
-    if (
-      !user.otp ||
-      !user.otpExpiresAt
-    ) {
+    if (!user.otp || !user.otpExpiresAt) {
       return res.status(400).json({
-        message:
-          "OTP not found. Please request a new OTP.",
+        message: "OTP not found. Please request a new OTP.",
       });
     }
 
-    if (
-      user.otpExpiresAt < new Date()
-    ) {
+    if (user.otpExpiresAt < new Date()) {
       return res.status(400).json({
-        message:
-          "OTP has expired. Please request a new OTP.",
+        message: "OTP has expired. Please request a new OTP.",
       });
     }
 
@@ -143,14 +121,10 @@ const verifyOTP = async (req, res) => {
     await user.save();
 
     res.status(200).json({
-      message:
-        "Email verified successfully",
+      message: "Email verified successfully",
     });
   } catch (error) {
-    console.error(
-      "Verify OTP Error:",
-      error
-    );
+    console.error("Verify OTP Error:", error);
 
     res.status(500).json({
       message: "Server error",
@@ -183,31 +157,24 @@ const resendOTP = async (req, res) => {
 
     if (user.isVerified) {
       return res.status(400).json({
-        message:
-          "Email is already verified",
+        message: "Email is already verified",
       });
     }
 
     const otp = generateOTP();
 
     user.otp = otp;
-    user.otpExpiresAt = new Date(
-      Date.now() + 10 * 60 * 1000
-    );
+    user.otpExpiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
     await user.save();
 
     await sendOTPEmail(email, otp);
 
     res.status(200).json({
-      message:
-        "New OTP sent successfully",
+      message: "New OTP sent successfully",
     });
   } catch (error) {
-    console.error(
-      "Resend OTP Error:",
-      error
-    );
+    console.error("Resend OTP Error:", error);
 
     res.status(500).json({
       message: "Server error",
@@ -218,10 +185,7 @@ const resendOTP = async (req, res) => {
 // ==========================================
 // Forgot Password
 // ==========================================
-const forgotPassword = async (
-  req,
-  res
-) => {
+const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
 
@@ -243,17 +207,14 @@ const forgotPassword = async (
 
     if (!user.isVerified) {
       return res.status(400).json({
-        message:
-          "Please verify your email first",
+        message: "Please verify your email first",
       });
     }
 
     const otp = generateOTP();
 
     user.otp = otp;
-    user.otpExpiresAt = new Date(
-      Date.now() + 10 * 60 * 1000
-    );
+    user.otpExpiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
     await user.save();
 
@@ -264,10 +225,7 @@ const forgotPassword = async (
         "Password reset OTP sent successfully. Please check your email.",
     });
   } catch (error) {
-    console.error(
-      "Forgot Password Error:",
-      error
-    );
+    console.error("Forgot Password Error:", error);
 
     res.status(500).json({
       message: "Server error",
@@ -278,32 +236,19 @@ const forgotPassword = async (
 // ==========================================
 // Reset Password
 // ==========================================
-const resetPassword = async (
-  req,
-  res
-) => {
+const resetPassword = async (req, res) => {
   try {
-    const {
-      email,
-      otp,
-      newPassword,
-    } = req.body;
+    const { email, otp, newPassword } = req.body;
 
-    if (
-      !email ||
-      !otp ||
-      !newPassword
-    ) {
+    if (!email || !otp || !newPassword) {
       return res.status(400).json({
-        message:
-          "Email, OTP and new password are required",
+        message: "Email, OTP and new password are required",
       });
     }
 
     if (newPassword.length < 6) {
       return res.status(400).json({
-        message:
-          "Password must be at least 6 characters",
+        message: "Password must be at least 6 characters",
       });
     }
 
@@ -317,18 +262,13 @@ const resetPassword = async (
       });
     }
 
-    if (
-      !user.otp ||
-      !user.otpExpiresAt
-    ) {
+    if (!user.otp || !user.otpExpiresAt) {
       return res.status(400).json({
         message: "OTP not found",
       });
     }
 
-    if (
-      user.otpExpiresAt < new Date()
-    ) {
+    if (user.otpExpiresAt < new Date()) {
       return res.status(400).json({
         message: "OTP has expired",
       });
@@ -340,11 +280,7 @@ const resetPassword = async (
       });
     }
 
-    const hashedPassword =
-      await bcrypt.hash(
-        newPassword,
-        10
-      );
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     user.password = hashedPassword;
     user.otp = null;
@@ -353,14 +289,10 @@ const resetPassword = async (
     await user.save();
 
     res.status(200).json({
-      message:
-        "Password reset successfully",
+      message: "Password reset successfully",
     });
   } catch (error) {
-    console.error(
-      "Reset Password Error:",
-      error
-    );
+    console.error("Reset Password Error:", error);
 
     res.status(500).json({
       message: "Server error",
@@ -373,13 +305,11 @@ const resetPassword = async (
 // ==========================================
 const loginUser = async (req, res) => {
   try {
-    const { email, password } =
-      req.body;
+    const { email, password } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({
-        message:
-          "Email and password are required",
+        message: "Email and password are required",
       });
     }
 
@@ -389,28 +319,24 @@ const loginUser = async (req, res) => {
 
     if (!user) {
       return res.status(401).json({
-        message:
-          "Invalid email or password",
+        message: "Invalid email or password",
       });
     }
 
     if (!user.isVerified) {
       return res.status(401).json({
-        message:
-          "Please verify your email first",
+        message: "Please verify your email first",
       });
     }
 
-    const isPasswordCorrect =
-      await bcrypt.compare(
-        password,
-        user.password
-      );
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      user.password
+    );
 
     if (!isPasswordCorrect) {
       return res.status(401).json({
-        message:
-          "Invalid email or password",
+        message: "Invalid email or password",
       });
     }
 
@@ -425,18 +351,15 @@ const loginUser = async (req, res) => {
       }
     );
 
+    // ==========================================
+    // Production Authentication Cookie
+    // ==========================================
     res.cookie("token", token, {
       httpOnly: true,
-      secure:
-        process.env.NODE_ENV ===
-        "production",
-      sameSite:
-        process.env.NODE_ENV ===
-        "production"
-          ? "none"
-          : "lax",
-      maxAge:
-        7 * 24 * 60 * 60 * 1000,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     res.status(200).json({
@@ -446,15 +369,11 @@ const loginUser = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
-        isVerified:
-          user.isVerified,
+        isVerified: user.isVerified,
       },
     });
   } catch (error) {
-    console.error(
-      "Login Error:",
-      error
-    );
+    console.error("Login Error:", error);
 
     res.status(500).json({
       message: "Server error",
@@ -471,10 +390,7 @@ const getProfile = async (req, res) => {
       user: req.user,
     });
   } catch (error) {
-    console.error(
-      "Get Profile Error:",
-      error
-    );
+    console.error("Get Profile Error:", error);
 
     res.status(500).json({
       message: "Server error",
@@ -485,31 +401,20 @@ const getProfile = async (req, res) => {
 // ==========================================
 // Logout User
 // ==========================================
-const logoutUser = async (
-  req,
-  res
-) => {
+const logoutUser = async (req, res) => {
   try {
     res.clearCookie("token", {
       httpOnly: true,
-      secure:
-        process.env.NODE_ENV ===
-        "production",
-      sameSite:
-        process.env.NODE_ENV ===
-        "production"
-          ? "none"
-          : "lax",
+      secure: true,
+      sameSite: "none",
+      path: "/",
     });
 
     res.status(200).json({
       message: "Logout successful",
     });
   } catch (error) {
-    console.error(
-      "Logout Error:",
-      error
-    );
+    console.error("Logout Error:", error);
 
     res.status(500).json({
       message: "Server error",
@@ -517,6 +422,9 @@ const logoutUser = async (
   }
 };
 
+// ==========================================
+// Export Controllers
+// ==========================================
 module.exports = {
   registerUser,
   verifyOTP,
