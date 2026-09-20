@@ -280,6 +280,16 @@ function MyOrders() {
                   <div
                     key={order._id}
                     style={orderCardStyle}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-4px)";
+                      e.currentTarget.style.boxShadow =
+                        "0 20px 48px rgba(15,23,42,0.11)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow =
+                        "0 12px 38px rgba(15,23,42,0.07)";
+                    }}
                   >
                     {/* ==========================================
                         Order Header
@@ -563,15 +573,16 @@ function MyOrders() {
 
 const pageStyle = {
   minHeight: "100vh",
-  backgroundColor: "#f7f7f7",
-  fontFamily:
-    "Inter, Arial, sans-serif",
+  background:
+    "radial-gradient(circle at top left, rgba(99,102,241,0.12), transparent 28%), linear-gradient(180deg, #f8faff 0%, #f7f8fc 55%, #ffffff 100%)",
+  fontFamily: "Inter, Arial, sans-serif",
+  color: "#0f172a",
 };
 
 const mainStyle = {
-  maxWidth: "1000px",
+  maxWidth: "1120px",
   margin: "0 auto",
-  padding: "35px 20px 60px",
+  padding: "42px 24px 72px",
 };
 
 // ==========================================
@@ -579,12 +590,14 @@ const mainStyle = {
 // ==========================================
 
 const headerStyle = {
-  backgroundColor: "#222",
+  background:
+    "linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #312e81 100%)",
   color: "white",
+  boxShadow: "0 12px 35px rgba(15,23,42,0.14)",
 };
 
 const headerInnerStyle = {
-  maxWidth: "1100px",
+  maxWidth: "1160px",
   margin: "0 auto",
   padding: "18px 24px",
   display: "flex",
@@ -597,25 +610,27 @@ const logoButtonStyle = {
   border: "none",
   backgroundColor: "transparent",
   color: "white",
-  fontSize: "20px",
-  fontWeight: "700",
+  fontSize: "21px",
+  fontWeight: "850",
+  letterSpacing: "-0.5px",
   cursor: "pointer",
   padding: 0,
 };
 
 const headerActionsStyle = {
   display: "flex",
-  gap: "10px",
+  gap: "9px",
 };
 
 const headerButtonStyle = {
   padding: "9px 14px",
-  border: "1px solid #777",
-  borderRadius: "7px",
-  backgroundColor: "transparent",
+  border: "1px solid rgba(255,255,255,0.18)",
+  borderRadius: "10px",
+  backgroundColor: "rgba(255,255,255,0.08)",
   color: "white",
   cursor: "pointer",
-  fontSize: "13px",
+  fontSize: "12px",
+  fontWeight: "700",
 };
 
 // ==========================================
@@ -625,37 +640,53 @@ const headerButtonStyle = {
 const pageHeaderStyle = {
   display: "flex",
   justifyContent: "space-between",
-  alignItems: "center",
+  alignItems: "flex-end",
   gap: "20px",
-  marginBottom: "25px",
+  marginBottom: "28px",
+  padding: "30px",
+  borderRadius: "24px",
+  background:
+    "linear-gradient(135deg, #0f172a 0%, #1e293b 58%, #4338ca 100%)",
+  boxShadow: "0 18px 50px rgba(15,23,42,0.15)",
+  color: "white",
 };
 
 const pageTitleStyle = {
   margin: 0,
-  fontSize: "30px",
+  fontSize: "clamp(34px, 5vw, 48px)",
+  fontWeight: "850",
+  letterSpacing: "-1.5px",
 };
 
 const pageSubtitleStyle = {
-  margin: "6px 0 0",
-  color: "#777",
+  margin: "9px 0 0",
+  color: "#cbd5e1",
   fontSize: "14px",
 };
 
 const shopButtonStyle = {
-  padding: "11px 17px",
-  border: "1px solid #222",
-  borderRadius: "8px",
-  backgroundColor: "white",
-  color: "#222",
+  padding: "12px 17px",
+  border: "1px solid rgba(255,255,255,0.18)",
+  borderRadius: "12px",
+  backgroundColor: "rgba(255,255,255,0.10)",
+  color: "white",
   cursor: "pointer",
   fontSize: "13px",
-  fontWeight: "600",
+  fontWeight: "750",
+  backdropFilter: "blur(10px)",
 };
 
 const orderCountStyle = {
-  marginBottom: "12px",
-  color: "#777",
-  fontSize: "13px",
+  display: "inline-flex",
+  alignItems: "center",
+  marginBottom: "14px",
+  padding: "7px 11px",
+  borderRadius: "999px",
+  backgroundColor: "#eef2ff",
+  border: "1px solid #e0e7ff",
+  color: "#4f46e5",
+  fontSize: "12px",
+  fontWeight: "800",
 };
 
 // ==========================================
@@ -663,12 +694,14 @@ const orderCountStyle = {
 // ==========================================
 
 const orderCardStyle = {
-  backgroundColor: "white",
-  borderRadius: "14px",
-  marginBottom: "18px",
+  background:
+    "linear-gradient(145deg, rgba(255,255,255,0.98), rgba(248,250,255,0.96))",
+  border: "1px solid #e2e8f0",
+  borderRadius: "22px",
+  marginBottom: "20px",
   padding: "22px",
-  boxShadow:
-    "0 4px 18px rgba(0,0,0,0.06)",
+  boxShadow: "0 12px 38px rgba(15,23,42,0.07)",
+  transition: "transform 0.2s ease, box-shadow 0.2s ease",
 };
 
 const orderHeaderStyle = {
@@ -676,102 +709,112 @@ const orderHeaderStyle = {
   justifyContent: "space-between",
   alignItems: "center",
   gap: "15px",
-  paddingBottom: "17px",
-  borderBottom: "1px solid #eee",
+  paddingBottom: "18px",
+  borderBottom: "1px solid #e2e8f0",
 };
 
 const orderHeaderLeftStyle = {
   display: "flex",
   alignItems: "center",
-  gap: "12px",
+  gap: "13px",
   minWidth: 0,
 };
 
 const orderIconStyle = {
-  width: "42px",
-  height: "42px",
+  width: "48px",
+  height: "48px",
   flexShrink: 0,
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  borderRadius: "50%",
-  backgroundColor: "#f3f3f3",
-  fontSize: "18px",
+  borderRadius: "15px",
+  background: "linear-gradient(135deg, #eef2ff, #e0e7ff)",
+  color: "#4f46e5",
+  fontSize: "20px",
+  boxShadow: "inset 0 0 0 1px rgba(99,102,241,0.08)",
 };
 
 const orderTitleStyle = {
   margin: 0,
-  fontSize: "16px",
+  fontSize: "17px",
+  fontWeight: "800",
   wordBreak: "break-all",
+  letterSpacing: "-0.2px",
 };
 
 const dateStyle = {
   margin: "5px 0 0",
-  color: "#888",
+  color: "#64748b",
   fontSize: "12px",
 };
-
-// ==========================================
-// Status
-// ==========================================
 
 const baseStatusStyle = {
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  padding: "6px 10px",
-  borderRadius: "20px",
+  padding: "7px 11px",
+  borderRadius: "999px",
   fontSize: "10px",
-  fontWeight: "700",
+  fontWeight: "800",
+  letterSpacing: "0.4px",
   whiteSpace: "nowrap",
+  border: "1px solid transparent",
 };
 
 const placedStatusStyle = {
   ...baseStatusStyle,
-  backgroundColor: "#f0f0f0",
-  color: "#555",
+  backgroundColor: "#f1f5f9",
+  color: "#475569",
+  borderColor: "#e2e8f0",
 };
 
 const processingStatusStyle = {
   ...baseStatusStyle,
-  backgroundColor: "#edf4ff",
-  color: "#315d9e",
+  backgroundColor: "#eff6ff",
+  color: "#2563eb",
+  borderColor: "#dbeafe",
 };
 
 const shippedStatusStyle = {
   ...baseStatusStyle,
-  backgroundColor: "#f0efff",
-  color: "#574a9b",
+  backgroundColor: "#eef2ff",
+  color: "#4f46e5",
+  borderColor: "#e0e7ff",
 };
 
 const deliveredStatusStyle = {
   ...baseStatusStyle,
-  backgroundColor: "#e9f7ee",
-  color: "#26733f",
+  backgroundColor: "#ecfdf5",
+  color: "#15803d",
+  borderColor: "#bbf7d0",
 };
 
 const cancelledStatusStyle = {
   ...baseStatusStyle,
-  backgroundColor: "#fff0f0",
-  color: "#ad3030",
+  backgroundColor: "#fff1f2",
+  color: "#be123c",
+  borderColor: "#fecdd3",
 };
 
 const paidStatusStyle = {
   ...baseStatusStyle,
-  backgroundColor: "#e9f7ee",
-  color: "#26733f",
+  backgroundColor: "#ecfdf5",
+  color: "#15803d",
+  borderColor: "#bbf7d0",
 };
 
 const pendingStatusStyle = {
   ...baseStatusStyle,
-  backgroundColor: "#fff4dc",
-  color: "#966300",
+  backgroundColor: "#fffbeb",
+  color: "#a16207",
+  borderColor: "#fde68a",
 };
 
 const failedStatusStyle = {
   ...baseStatusStyle,
-  backgroundColor: "#fff0f0",
-  color: "#ad3030",
+  backgroundColor: "#fff1f2",
+  color: "#be123c",
+  borderColor: "#fecdd3",
 };
 
 // ==========================================
@@ -780,27 +823,28 @@ const failedStatusStyle = {
 
 const quickInfoStyle = {
   display: "grid",
-  gridTemplateColumns:
-    "repeat(auto-fit, minmax(150px, 1fr))",
-  gap: "1px",
-  margin: "17px 0",
-  backgroundColor: "#eee",
-  borderRadius: "8px",
-  overflow: "hidden",
+  gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+  gap: "10px",
+  margin: "18px 0",
 };
 
 const quickInfoItemStyle = {
   display: "flex",
   flexDirection: "column",
   gap: "7px",
-  padding: "13px",
-  backgroundColor: "#fafafa",
+  padding: "13px 14px",
+  backgroundColor: "#f8fafc",
+  border: "1px solid #e2e8f0",
+  borderRadius: "13px",
   fontSize: "12px",
 };
 
 const quickInfoLabelStyle = {
-  color: "#888",
+  color: "#94a3b8",
   fontSize: "10px",
+  fontWeight: "800",
+  textTransform: "uppercase",
+  letterSpacing: "0.6px",
 };
 
 // ==========================================
@@ -815,32 +859,35 @@ const itemsContainerStyle = {
 const itemStyle = {
   display: "flex",
   alignItems: "center",
-  gap: "14px",
-  padding: "13px 0",
-  borderBottom: "1px solid #eee",
+  gap: "15px",
+  padding: "14px 0",
+  borderBottom: "1px solid #e2e8f0",
 };
 
 const imageContainerStyle = {
-  width: "68px",
-  height: "68px",
+  width: "76px",
+  height: "76px",
   flexShrink: 0,
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   overflow: "hidden",
-  borderRadius: "8px",
-  backgroundColor: "#f5f5f5",
+  borderRadius: "14px",
+  background: "linear-gradient(145deg, #f8fafc, #eef2ff)",
+  border: "1px solid #e2e8f0",
+  padding: "5px",
 };
 
 const imageStyle = {
   width: "100%",
   height: "100%",
   objectFit: "contain",
+  borderRadius: "10px",
 };
 
 const noImageStyle = {
-  fontSize: "22px",
-  color: "#999",
+  fontSize: "25px",
+  color: "#94a3b8",
 };
 
 const itemDetailsStyle = {
@@ -849,18 +896,22 @@ const itemDetailsStyle = {
 };
 
 const itemNameStyle = {
-  margin: "0 0 5px",
+  margin: "0 0 6px",
   fontSize: "14px",
+  fontWeight: "750",
+  color: "#0f172a",
 };
 
 const itemMetaStyle = {
   margin: 0,
-  color: "#777",
+  color: "#64748b",
   fontSize: "12px",
 };
 
 const itemTotalStyle = {
-  fontSize: "14px",
+  fontSize: "15px",
+  fontWeight: "800",
+  color: "#111827",
   whiteSpace: "nowrap",
 };
 
@@ -873,31 +924,38 @@ const orderFooterStyle = {
   justifyContent: "space-between",
   alignItems: "center",
   gap: "15px",
-  marginTop: "17px",
-  paddingTop: "17px",
-  borderTop: "1px solid #eee",
+  marginTop: "18px",
+  paddingTop: "18px",
+  borderTop: "1px solid #e2e8f0",
 };
 
 const totalLabelStyle = {
   display: "block",
-  marginBottom: "4px",
-  color: "#888",
-  fontSize: "11px",
+  marginBottom: "5px",
+  color: "#94a3b8",
+  fontSize: "10px",
+  fontWeight: "800",
+  textTransform: "uppercase",
+  letterSpacing: "0.6px",
 };
 
 const totalAmountStyle = {
-  fontSize: "20px",
+  fontSize: "23px",
+  fontWeight: "850",
+  color: "#4f46e5",
+  letterSpacing: "-0.5px",
 };
 
 const viewButtonStyle = {
-  padding: "11px 17px",
+  padding: "12px 18px",
   border: "none",
-  borderRadius: "8px",
-  backgroundColor: "#222",
+  borderRadius: "12px",
+  background: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
   color: "white",
   cursor: "pointer",
   fontSize: "13px",
-  fontWeight: "600",
+  fontWeight: "800",
+  boxShadow: "0 9px 22px rgba(79,70,229,0.22)",
 };
 
 // ==========================================
@@ -905,17 +963,18 @@ const viewButtonStyle = {
 // ==========================================
 
 const emptyStyle = {
-  padding: "60px 25px",
+  padding: "80px 25px",
   textAlign: "center",
-  backgroundColor: "white",
-  borderRadius: "14px",
-  boxShadow:
-    "0 4px 18px rgba(0,0,0,0.06)",
+  background: "linear-gradient(145deg, #ffffff, #f8faff)",
+  border: "1px solid #e0e7ff",
+  borderRadius: "24px",
+  boxShadow: "0 16px 45px rgba(15,23,42,0.07)",
 };
 
 const emptyIconStyle = {
-  fontSize: "45px",
-  marginBottom: "10px",
+  fontSize: "58px",
+  marginBottom: "14px",
+  filter: "drop-shadow(0 8px 14px rgba(79,70,229,0.14))",
 };
 
 const errorBoxStyle = {
@@ -924,9 +983,10 @@ const errorBoxStyle = {
   gap: "12px",
   padding: "15px",
   marginBottom: "20px",
-  backgroundColor: "#fff0f0",
-  borderRadius: "9px",
-  color: "#a52d2d",
+  backgroundColor: "#fff1f2",
+  border: "1px solid #fecdd3",
+  borderRadius: "13px",
+  color: "#be123c",
   fontSize: "13px",
 };
 
@@ -939,15 +999,16 @@ const errorBoxParagraphStyle = {
 };
 
 const buttonStyle = {
-  padding: "12px 22px",
+  padding: "13px 23px",
   marginTop: "12px",
   border: "none",
-  borderRadius: "8px",
-  backgroundColor: "#222",
+  borderRadius: "12px",
+  background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
   color: "white",
   cursor: "pointer",
   fontSize: "14px",
-  fontWeight: "600",
+  fontWeight: "750",
+  boxShadow: "0 9px 22px rgba(79,70,229,0.22)",
 };
 
 // ==========================================
@@ -960,22 +1021,27 @@ const centerStyle = {
   justifyContent: "center",
   alignItems: "center",
   padding: "20px",
-  fontFamily:
-    "Inter, Arial, sans-serif",
+  fontFamily: "Inter, Arial, sans-serif",
+  background:
+    "radial-gradient(circle at top, rgba(99,102,241,0.10), transparent 35%), #f8fafc",
 };
 
 const loadingCardStyle = {
   textAlign: "center",
+  padding: "45px",
+  backgroundColor: "white",
+  borderRadius: "22px",
+  border: "1px solid #e0e7ff",
+  boxShadow: "0 15px 45px rgba(15,23,42,0.08)",
 };
 
 const loadingIconStyle = {
-  fontSize: "45px",
+  fontSize: "48px",
 };
 
 const mutedTextStyle = {
-  color: "#777",
+  color: "#64748b",
   lineHeight: "1.6",
   fontSize: "14px",
 };
-
 export default MyOrders;

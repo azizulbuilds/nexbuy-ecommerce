@@ -262,11 +262,27 @@ function OrderDetails() {
 
   return (
     <div style={pageStyle}>
+
+      <style>{`
+        @media (max-width: 680px) {
+          .nexbuy-order-main { padding: 22px 14px 50px !important; }
+          .nexbuy-order-header-inner { padding: 13px 14px !important; }
+          .nexbuy-order-section { padding: 19px !important; border-radius: 18px !important; }
+          .nexbuy-order-success { padding: 21px !important; border-radius: 20px !important; }
+          .nexbuy-order-item { align-items: flex-start !important; }
+          .nexbuy-order-image { width: 70px !important; height: 70px !important; }
+          .nexbuy-order-item-total { font-size: 14px !important; }
+          .nexbuy-order-payment-action { flex-direction: column !important; align-items: stretch !important; }
+          .nexbuy-order-pay-button { width: 100% !important; }
+          .nexbuy-order-summary { padding: 21px !important; }
+        }
+      `}</style>
       {/* ==========================================
           Header
       ========================================== */}
       <header style={headerStyle}>
         <div
+          className="nexbuy-order-header-inner"
           style={headerInnerStyle}
         >
           <button
@@ -302,11 +318,12 @@ function OrderDetails() {
         </div>
       </header>
 
-      <main style={mainStyle}>
+      <main className="nexbuy-order-main" style={mainStyle}>
         {/* ==========================================
             Success / Status Banner
         ========================================== */}
         <section
+          className="nexbuy-order-success"
           style={
             order.orderStatus ===
             "CANCELLED"
@@ -385,7 +402,7 @@ function OrderDetails() {
         {/* ==========================================
             Order Status Timeline
         ========================================== */}
-        <section style={sectionStyle}>
+        <section className="nexbuy-order-section" style={sectionStyle}>
           <div
             style={sectionHeaderStyle}
           >
@@ -512,7 +529,7 @@ function OrderDetails() {
         {/* ==========================================
             Payment Information
         ========================================== */}
-        <section style={sectionStyle}>
+        <section className="nexbuy-order-section" style={sectionStyle}>
           <div
             style={sectionHeaderStyle}
           >
@@ -591,9 +608,8 @@ function OrderDetails() {
             order.orderStatus !==
               "CANCELLED" && (
               <div
-                style={
-                  paymentActionStyle
-                }
+                className="nexbuy-order-payment-action"
+                style={paymentActionStyle}
               >
                 <div>
                   <strong>
@@ -612,14 +628,13 @@ function OrderDetails() {
                 </div>
 
                 <button
+                  className="nexbuy-order-pay-button"
                   onClick={() =>
                     navigate(
                       `/orders/${id}/payment`
                     )
                   }
-                  style={
-                    paymentButtonStyle
-                  }
+                  style={paymentButtonStyle}
                 >
                   Pay Now
                 </button>
@@ -630,7 +645,7 @@ function OrderDetails() {
         {/* ==========================================
             Shipping Address
         ========================================== */}
-        <section style={sectionStyle}>
+        <section className="nexbuy-order-section" style={sectionStyle}>
           <div
             style={sectionHeaderStyle}
           >
@@ -713,7 +728,7 @@ function OrderDetails() {
         {/* ==========================================
             Order Items
         ========================================== */}
-        <section style={sectionStyle}>
+        <section className="nexbuy-order-section" style={sectionStyle}>
           <div
             style={sectionHeaderStyle}
           >
@@ -741,6 +756,7 @@ function OrderDetails() {
               (item, index) => (
                 <div
                   key={`${item.product?._id || "item"}-${index}`}
+                  className="nexbuy-order-item"
                   style={{
                     ...itemStyle,
                     ...(index ===
@@ -751,9 +767,8 @@ function OrderDetails() {
                 >
                   {/* Image */}
                   <div
-                    style={
-                      imageContainerStyle
-                    }
+                    className="nexbuy-order-image"
+                    style={imageContainerStyle}
                   >
                     {item.image ? (
                       <img
@@ -809,9 +824,8 @@ function OrderDetails() {
 
                   {/* Total */}
                   <strong
-                    style={
-                      itemTotalStyle
-                    }
+                    className="nexbuy-order-item-total"
+                    style={itemTotalStyle}
                   >
                     ₹
                     {formatPrice(
@@ -829,6 +843,7 @@ function OrderDetails() {
             Order Summary
         ========================================== */}
         <section
+          className="nexbuy-order-summary"
           style={
             orderSummaryStyle
           }
@@ -923,30 +938,35 @@ function OrderDetails() {
   );
 }
 
+
 // ==========================================
-// Page
+// Premium Nexbuy Design System
 // ==========================================
 
 const pageStyle = {
   minHeight: "100vh",
-  backgroundColor: "#f7f7f7",
-  fontFamily:
-    "Inter, Arial, sans-serif",
+  background:
+    "radial-gradient(circle at 0% 0%, rgba(99,102,241,0.10), transparent 30%), radial-gradient(circle at 100% 10%, rgba(168,85,247,0.09), transparent 28%), #f6f7fb",
+  color: "#172033",
+  fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
 };
 
-// ==========================================
-// Header
-// ==========================================
-
 const headerStyle = {
-  backgroundColor: "#222",
+  position: "sticky",
+  top: 0,
+  zIndex: 20,
+  background: "rgba(15, 23, 42, 0.92)",
+  backdropFilter: "blur(18px)",
+  WebkitBackdropFilter: "blur(18px)",
   color: "white",
+  borderBottom: "1px solid rgba(255,255,255,0.10)",
+  boxShadow: "0 8px 30px rgba(15,23,42,0.16)",
 };
 
 const headerInnerStyle = {
-  maxWidth: "1100px",
+  maxWidth: "1120px",
   margin: "0 auto",
-  padding: "18px 24px",
+  padding: "16px 22px",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
@@ -955,129 +975,127 @@ const headerInnerStyle = {
 
 const logoButtonStyle = {
   border: "none",
-  backgroundColor: "transparent",
+  background: "transparent",
   color: "white",
-  fontSize: "20px",
-  fontWeight: "700",
+  fontSize: "21px",
+  fontWeight: "900",
+  letterSpacing: "-0.6px",
   cursor: "pointer",
   padding: 0,
 };
 
 const headerButtonsStyle = {
   display: "flex",
-  gap: "10px",
+  gap: "9px",
+  flexWrap: "wrap",
 };
 
 const headerButtonStyle = {
   padding: "9px 14px",
-  border: "1px solid #777",
-  borderRadius: "7px",
-  backgroundColor: "transparent",
-  color: "white",
+  border: "1px solid rgba(255,255,255,0.16)",
+  borderRadius: "11px",
+  background: "rgba(255,255,255,0.06)",
+  color: "rgba(255,255,255,0.92)",
   cursor: "pointer",
   fontSize: "13px",
+  fontWeight: "700",
+  transition: "all .2s ease",
 };
-
-// ==========================================
-// Main
-// ==========================================
 
 const mainStyle = {
-  maxWidth: "1000px",
+  maxWidth: "1040px",
   margin: "0 auto",
-  padding: "35px 20px 60px",
+  padding: "34px 20px 70px",
 };
 
-// ==========================================
-// Success Banner
-// ==========================================
-
 const successBoxStyle = {
+  position: "relative",
+  overflow: "hidden",
   display: "flex",
   alignItems: "center",
   gap: "18px",
-  padding: "25px",
+  padding: "28px",
   marginBottom: "18px",
-  backgroundColor: "white",
-  borderRadius: "14px",
-  boxShadow:
-    "0 4px 18px rgba(0,0,0,0.06)",
+  background: "linear-gradient(135deg, #ffffff 0%, #f8f7ff 100%)",
+  border: "1px solid #e7e7f2",
+  borderRadius: "24px",
+  boxShadow: "0 18px 45px rgba(31,41,55,0.08)",
 };
 
 const cancelledBannerStyle = {
   ...successBoxStyle,
-  backgroundColor: "#fff8f8",
+  background: "linear-gradient(135deg, #fff 0%, #fff5f5 100%)",
+  borderColor: "#ffd9d9",
 };
 
 const successIconStyle = {
-  width: "55px",
-  height: "55px",
+  width: "62px",
+  height: "62px",
   flexShrink: 0,
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  borderRadius: "50%",
-  backgroundColor: "#e9f7ee",
-  color: "#26733f",
-  fontSize: "25px",
-  fontWeight: "700",
+  borderRadius: "20px",
+  background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+  color: "white",
+  fontSize: "27px",
+  fontWeight: "900",
+  boxShadow: "0 12px 25px rgba(99,102,241,0.25)",
 };
 
 const successTitleStyle = {
   margin: 0,
-  fontSize: "25px",
+  fontSize: "clamp(22px, 4vw, 30px)",
+  lineHeight: 1.15,
+  letterSpacing: "-0.7px",
 };
 
 const successSubtitleStyle = {
-  margin: "6px 0 0",
-  color: "#777",
+  margin: "7px 0 0",
+  color: "#687086",
   fontSize: "14px",
+  lineHeight: 1.6,
 };
-
-// ==========================================
-// Meta
-// ==========================================
 
 const metaCardStyle = {
   display: "grid",
-  gridTemplateColumns:
-    "repeat(auto-fit, minmax(180px, 1fr))",
-  gap: "1px",
+  gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))",
+  gap: "12px",
   marginBottom: "18px",
-  backgroundColor: "#e5e5e5",
-  borderRadius: "12px",
-  overflow: "hidden",
 };
 
 const metaItemStyle = {
   display: "flex",
   flexDirection: "column",
-  gap: "6px",
+  gap: "7px",
   padding: "18px",
-  backgroundColor: "white",
+  background: "rgba(255,255,255,0.86)",
+  border: "1px solid #e7e9f2",
+  borderRadius: "18px",
+  boxShadow: "0 10px 28px rgba(31,41,55,0.055)",
 };
 
 const metaLabelStyle = {
-  color: "#888",
-  fontSize: "12px",
+  color: "#8a92a6",
+  fontSize: "11px",
+  fontWeight: "800",
+  textTransform: "uppercase",
+  letterSpacing: ".08em",
 };
 
 const metaValueStyle = {
   fontSize: "13px",
+  color: "#20283a",
   wordBreak: "break-all",
 };
-
-// ==========================================
-// Sections
-// ==========================================
 
 const sectionStyle = {
   padding: "25px",
   marginBottom: "18px",
-  backgroundColor: "white",
-  borderRadius: "14px",
-  boxShadow:
-    "0 4px 18px rgba(0,0,0,0.06)",
+  background: "rgba(255,255,255,0.94)",
+  border: "1px solid #e7e9f2",
+  borderRadius: "22px",
+  boxShadow: "0 14px 38px rgba(31,41,55,0.065)",
 };
 
 const sectionHeaderStyle = {
@@ -1091,93 +1109,88 @@ const sectionHeaderStyle = {
 const sectionTitleStyle = {
   margin: 0,
   fontSize: "20px",
+  letterSpacing: "-0.35px",
 };
 
 const sectionSubtitleStyle = {
-  margin: "5px 0 0",
-  color: "#888",
+  margin: "6px 0 0",
+  color: "#8a92a6",
   fontSize: "13px",
+  lineHeight: 1.5,
 };
-
-// ==========================================
-// Status Badges
-// ==========================================
 
 const baseBadgeStyle = {
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  padding: "6px 11px",
-  borderRadius: "20px",
-  fontSize: "11px",
-  fontWeight: "700",
+  padding: "7px 11px",
+  borderRadius: "999px",
+  fontSize: "10px",
+  fontWeight: "900",
+  letterSpacing: ".06em",
   whiteSpace: "nowrap",
 };
 
 const placedBadgeStyle = {
   ...baseBadgeStyle,
-  backgroundColor: "#f1f1f1",
-  color: "#555",
+  background: "#eef0f4",
+  color: "#5d6678",
 };
 
 const processingBadgeStyle = {
   ...baseBadgeStyle,
-  backgroundColor: "#eef4ff",
-  color: "#315d9e",
+  background: "#eaf0ff",
+  color: "#3f5eb7",
 };
 
 const shippedBadgeStyle = {
   ...baseBadgeStyle,
-  backgroundColor: "#f0efff",
-  color: "#574a9b",
+  background: "#eeeaff",
+  color: "#6648b5",
 };
 
 const deliveredBadgeStyle = {
   ...baseBadgeStyle,
-  backgroundColor: "#eaf7ee",
-  color: "#26733f",
+  background: "#e7f8ef",
+  color: "#21734a",
 };
 
 const cancelledBadgeStyle = {
   ...baseBadgeStyle,
-  backgroundColor: "#fff0f0",
-  color: "#b33131",
+  background: "#ffebeb",
+  color: "#b42323",
 };
 
 const paidBadgeStyle = {
   ...baseBadgeStyle,
-  backgroundColor: "#eaf7ee",
-  color: "#26733f",
+  background: "#e7f8ef",
+  color: "#21734a",
 };
 
 const pendingBadgeStyle = {
   ...baseBadgeStyle,
-  backgroundColor: "#fff5df",
-  color: "#9a6800",
+  background: "#fff4dc",
+  color: "#956400",
 };
 
 const failedBadgeStyle = {
   ...baseBadgeStyle,
-  backgroundColor: "#fff0f0",
-  color: "#b33131",
+  background: "#ffebeb",
+  color: "#b42323",
 };
-
-// ==========================================
-// Timeline
-// ==========================================
 
 const timelineStyle = {
   display: "flex",
   justifyContent: "space-between",
-  gap: "5px",
+  gap: "6px",
   overflowX: "auto",
-  padding: "5px 0",
+  padding: "8px 2px 4px",
 };
 
 const timelineItemStyle = {
   position: "relative",
   flex: 1,
-  minWidth: "120px",
+  minWidth: "125px",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -1185,81 +1198,88 @@ const timelineItemStyle = {
 };
 
 const timelineCircleStyle = {
-  width: "35px",
-  height: "35px",
+  width: "42px",
+  height: "42px",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   borderRadius: "50%",
-  backgroundColor: "#eee",
-  color: "#999",
+  background: "#f0f1f5",
+  border: "4px solid white",
+  color: "#a3a9b7",
   fontSize: "13px",
-  fontWeight: "700",
+  fontWeight: "900",
   zIndex: 2,
+  boxShadow: "0 0 0 1px #e3e5ec",
 };
 
 const timelineCompletedStyle = {
-  backgroundColor: "#222",
+  background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
   color: "white",
+  boxShadow: "0 8px 18px rgba(99,102,241,0.22)",
 };
 
 const timelineTextStyle = {
   display: "flex",
   flexDirection: "column",
   gap: "4px",
-  marginTop: "9px",
+  marginTop: "10px",
   fontSize: "12px",
 };
 
 const timelineLineStyle = {
   position: "absolute",
-  top: "17px",
-  left: "calc(50% + 17px)",
-  width: "calc(100% - 34px)",
-  height: "2px",
-  backgroundColor: "#e5e5e5",
+  top: "20px",
+  left: "calc(50% + 21px)",
+  width: "calc(100% - 42px)",
+  height: "3px",
+  background: "#e6e8ef",
+  borderRadius: "999px",
   zIndex: 1,
 };
 
 const timelineLineCompletedStyle = {
-  backgroundColor: "#222",
+  background: "linear-gradient(90deg, #6366f1, #8b5cf6)",
 };
 
 const cancelledMessageStyle = {
-  padding: "14px",
-  backgroundColor: "#fff5f5",
-  borderRadius: "8px",
+  padding: "16px",
+  background: "#fff4f4",
+  border: "1px solid #ffdede",
+  borderRadius: "14px",
   color: "#a52c2c",
   fontSize: "13px",
+  fontWeight: "700",
 };
-
-// ==========================================
-// Payment
-// ==========================================
 
 const paymentGridStyle = {
   display: "grid",
-  gridTemplateColumns:
-    "repeat(auto-fit, minmax(180px, 1fr))",
+  gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
   gap: "12px",
 };
 
 const infoBoxStyle = {
   display: "flex",
   flexDirection: "column",
-  gap: "8px",
-  padding: "16px",
-  border: "1px solid #eee",
-  borderRadius: "9px",
+  gap: "9px",
+  padding: "17px",
+  background: "#fafbfe",
+  border: "1px solid #e8eaf1",
+  borderRadius: "15px",
 };
 
 const infoLabelStyle = {
-  color: "#888",
-  fontSize: "12px",
+  color: "#8a92a6",
+  fontSize: "11px",
+  fontWeight: "800",
+  textTransform: "uppercase",
+  letterSpacing: ".06em",
 };
 
 const paymentAmountStyle = {
-  fontSize: "18px",
+  fontSize: "20px",
+  color: "#4338ca",
+  letterSpacing: "-.3px",
 };
 
 const paymentActionStyle = {
@@ -1268,65 +1288,72 @@ const paymentActionStyle = {
   alignItems: "center",
   gap: "15px",
   marginTop: "18px",
-  padding: "16px",
-  borderRadius: "9px",
-  backgroundColor: "#f8f8f8",
+  padding: "18px",
+  borderRadius: "16px",
+  background: "linear-gradient(135deg, #f4f2ff, #faf8ff)",
+  border: "1px solid #e6e0ff",
 };
 
 const paymentActionTextStyle = {
-  margin: "4px 0 0",
-  color: "#777",
+  margin: "5px 0 0",
+  color: "#70788c",
   fontSize: "12px",
+  lineHeight: 1.5,
 };
 
 const paymentButtonStyle = {
-  padding: "11px 20px",
+  padding: "12px 20px",
   border: "none",
-  borderRadius: "8px",
-  backgroundColor: "#222",
+  borderRadius: "12px",
+  background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
   color: "white",
   fontSize: "13px",
-  fontWeight: "700",
+  fontWeight: "800",
   cursor: "pointer",
+  boxShadow: "0 10px 22px rgba(99,102,241,0.23)",
+  whiteSpace: "nowrap",
 };
 
-// ==========================================
-// Address
-// ==========================================
-
 const addressCardStyle = {
-  padding: "18px",
-  backgroundColor: "#f8f8f8",
-  borderRadius: "9px",
-  lineHeight: "1.5",
+  padding: "19px",
+  background: "linear-gradient(135deg, #f8f9fd, #f5f3ff)",
+  border: "1px solid #e6e7f0",
+  borderRadius: "16px",
+  lineHeight: "1.65",
   fontSize: "13px",
+  color: "#5d6678",
 };
 
 const addressNameStyle = {
   display: "block",
   marginBottom: "8px",
-  fontSize: "15px",
+  fontSize: "16px",
+  color: "#20283a",
 };
 
 const addressPhoneStyle = {
-  marginTop: "10px",
-  fontWeight: "600",
+  marginTop: "11px",
+  fontWeight: "800",
+  color: "#4338ca",
 };
 
 const addressIconStyle = {
-  fontSize: "20px",
+  width: "38px",
+  height: "38px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: "12px",
+  background: "#eeebff",
+  fontSize: "18px",
 };
-
-// ==========================================
-// Items
-// ==========================================
 
 const itemStyle = {
   display: "flex",
   alignItems: "center",
   gap: "18px",
-  padding: "16px 0",
-  borderBottom: "1px solid #eee",
+  padding: "17px 0",
+  borderBottom: "1px solid #eceef3",
 };
 
 const noBorderStyle = {
@@ -1334,25 +1361,27 @@ const noBorderStyle = {
 };
 
 const imageContainerStyle = {
-  width: "85px",
-  height: "85px",
+  width: "88px",
+  height: "88px",
   flexShrink: 0,
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   overflow: "hidden",
-  borderRadius: "9px",
-  backgroundColor: "#f2f2f2",
+  borderRadius: "16px",
+  background: "linear-gradient(145deg, #f3f4f8, #eceef5)",
+  border: "1px solid #e4e6ed",
 };
 
 const imageStyle = {
   width: "100%",
   height: "100%",
   objectFit: "contain",
+  transition: "transform .25s ease",
 };
 
 const noImageStyle = {
-  color: "#999",
+  color: "#9aa1b1",
   fontSize: "25px",
 };
 
@@ -1364,70 +1393,70 @@ const itemDetailsStyle = {
 const itemNameStyle = {
   margin: "0 0 7px",
   fontSize: "15px",
+  color: "#20283a",
+  lineHeight: 1.35,
 };
 
 const itemMetaStyle = {
   margin: "0 0 8px",
-  color: "#777",
+  color: "#727b8f",
   fontSize: "13px",
 };
 
 const quantityBadgeStyle = {
   display: "inline-block",
-  padding: "4px 8px",
-  borderRadius: "5px",
-  backgroundColor: "#f2f2f2",
-  color: "#666",
+  padding: "5px 9px",
+  borderRadius: "999px",
+  background: "#f0efff",
+  color: "#5a48a9",
   fontSize: "10px",
+  fontWeight: "800",
 };
 
 const itemTotalStyle = {
   fontSize: "16px",
+  color: "#20283a",
   whiteSpace: "nowrap",
 };
 
-// ==========================================
-// Summary
-// ==========================================
-
 const orderSummaryStyle = {
-  padding: "25px",
+  padding: "26px",
   marginBottom: "18px",
-  backgroundColor: "white",
-  borderRadius: "14px",
-  boxShadow:
-    "0 4px 18px rgba(0,0,0,0.06)",
+  background: "linear-gradient(145deg, #151b31, #222a4b)",
+  color: "white",
+  borderRadius: "22px",
+  boxShadow: "0 20px 42px rgba(15,23,42,0.18)",
 };
 
 const orderSummaryTitleStyle = {
-  margin: "0 0 18px",
+  margin: "0 0 20px",
   fontSize: "19px",
 };
 
 const summaryRowStyle = {
   display: "flex",
   justifyContent: "space-between",
-  marginBottom: "12px",
-  color: "#666",
+  marginBottom: "13px",
+  color: "rgba(255,255,255,0.70)",
   fontSize: "14px",
 };
 
 const freeShippingStyle = {
-  color: "#26733f",
-  fontWeight: "700",
+  color: "#86efac",
+  fontWeight: "900",
 };
 
 const summaryDividerStyle = {
   height: "1px",
-  margin: "18px 0",
-  backgroundColor: "#eee",
+  margin: "19px 0",
+  background: "rgba(255,255,255,0.12)",
 };
 
 const summaryTotalStyle = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  fontSize: "20px",
+  fontSize: "21px",
 };
 
 const actionButtonsStyle = {
@@ -1435,29 +1464,28 @@ const actionButtonsStyle = {
   justifyContent: "center",
   gap: "12px",
   flexWrap: "wrap",
+  paddingTop: "3px",
 };
 
 const buttonStyle = {
-  padding: "13px 24px",
+  padding: "13px 23px",
   border: "none",
-  borderRadius: "8px",
-  backgroundColor: "#222",
+  borderRadius: "12px",
+  background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
   color: "white",
   fontSize: "14px",
-  fontWeight: "600",
+  fontWeight: "800",
   cursor: "pointer",
+  boxShadow: "0 10px 24px rgba(99,102,241,0.20)",
 };
 
 const secondaryLargeButtonStyle = {
   ...buttonStyle,
-  backgroundColor: "white",
-  color: "#222",
-  border: "1px solid #ddd",
+  background: "white",
+  color: "#30384c",
+  border: "1px solid #dfe2eb",
+  boxShadow: "0 8px 18px rgba(31,41,55,0.05)",
 };
-
-// ==========================================
-// Error / Loading
-// ==========================================
 
 const centerStyle = {
   minHeight: "100vh",
@@ -1465,37 +1493,62 @@ const centerStyle = {
   justifyContent: "center",
   alignItems: "center",
   padding: "20px",
-  fontFamily:
-    "Inter, Arial, sans-serif",
+  background:
+    "radial-gradient(circle at 20% 10%, rgba(99,102,241,0.12), transparent 30%), #f6f7fb",
+  fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
 };
 
 const loadingCardStyle = {
+  width: "100%",
+  maxWidth: "430px",
+  padding: "42px 30px",
   textAlign: "center",
+  background: "rgba(255,255,255,0.94)",
+  border: "1px solid #e7e9f2",
+  borderRadius: "24px",
+  boxShadow: "0 20px 50px rgba(31,41,55,0.09)",
 };
 
 const loadingIconStyle = {
-  fontSize: "45px",
+  width: "70px",
+  height: "70px",
+  margin: "0 auto 18px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: "22px",
+  background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+  fontSize: "34px",
+  boxShadow: "0 14px 28px rgba(99,102,241,0.22)",
 };
 
 const mutedTextStyle = {
-  color: "#777",
-  lineHeight: "1.6",
+  color: "#737c90",
+  lineHeight: "1.65",
   fontSize: "14px",
 };
 
 const errorCardStyle = {
   width: "100%",
-  maxWidth: "450px",
-  padding: "40px",
+  maxWidth: "480px",
+  padding: "42px 32px",
   textAlign: "center",
-  backgroundColor: "white",
-  borderRadius: "14px",
-  boxShadow:
-    "0 4px 20px rgba(0,0,0,0.08)",
+  background: "rgba(255,255,255,0.96)",
+  border: "1px solid #e7e9f2",
+  borderRadius: "24px",
+  boxShadow: "0 20px 50px rgba(31,41,55,0.10)",
 };
 
 const errorIconStyle = {
-  fontSize: "42px",
+  width: "68px",
+  height: "68px",
+  margin: "0 auto 18px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: "22px",
+  background: "#fff0f0",
+  fontSize: "31px",
 };
 
 const errorButtonRowStyle = {
@@ -1503,17 +1556,18 @@ const errorButtonRowStyle = {
   justifyContent: "center",
   gap: "10px",
   flexWrap: "wrap",
-  marginTop: "20px",
+  marginTop: "22px",
 };
 
 const secondaryButtonStyle = {
   padding: "12px 20px",
-  border: "1px solid #ddd",
-  borderRadius: "8px",
-  backgroundColor: "white",
-  color: "#222",
+  border: "1px solid #dfe2eb",
+  borderRadius: "12px",
+  background: "white",
+  color: "#30384c",
   cursor: "pointer",
   fontSize: "14px",
+  fontWeight: "700",
 };
 
 export default OrderDetails;

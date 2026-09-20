@@ -4,6 +4,7 @@ import React, {
 } from "react";
 
 import {
+  Link,
   useNavigate,
 } from "react-router-dom";
 
@@ -27,7 +28,7 @@ function Home() {
         setProducts(
           response.data.products.slice(
             0,
-            8
+            4
           )
         );
       } catch (error) {
@@ -722,7 +723,7 @@ function Home() {
         <div style={footerInnerStyle}>
           <div>
             <h3 style={footerBrandStyle}>
-              🛍️ MERN E-Commerce
+              🛍️ Nexbuy
             </h3>
 
             <p style={footerDescriptionStyle}>
@@ -733,38 +734,32 @@ function Home() {
           </div>
 
           <div style={footerLinksStyle}>
-            <button
-              onClick={() =>
-                navigate("/products")
-              }
+            <Link
+              to="/products"
               style={footerLinkStyle}
             >
               Products
-            </button>
+            </Link>
 
-            <button
-              onClick={() =>
-                navigate("/login")
-              }
+            <Link
+              to="/login"
               style={footerLinkStyle}
             >
               Login
-            </button>
+            </Link>
 
-            <button
-              onClick={() =>
-                navigate("/register")
-              }
+            <Link
+              to="/register"
               style={footerLinkStyle}
             >
               Register
-            </button>
+            </Link>
           </div>
         </div>
 
         <div style={footerBottomStyle}>
           <span>
-            © 2026 MERN E-Commerce
+            © 2026 Nexbuy. All rights reserved.
           </span>
 
           <span>
@@ -1639,10 +1634,9 @@ const footerLinksStyle = {
 };
 
 const footerLinkStyle = {
-  border: "none",
-  backgroundColor: "transparent",
   color: "#cbd5e1",
   fontSize: "12px",
+  textDecoration: "none",
   cursor: "pointer",
 };
 

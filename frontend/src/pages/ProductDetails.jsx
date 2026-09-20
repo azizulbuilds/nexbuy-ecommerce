@@ -228,6 +228,12 @@ function ProductDetails() {
                 src={product.images[0]}
                 alt={product.name}
                 style={imageStyle}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.055)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                }}
               />
             ) : (
               <div style={noImageStyle}>
@@ -393,6 +399,18 @@ function ProductDetails() {
                       ? loadingButtonStyle
                       : {}),
                   }}
+                  onMouseEnter={(e) => {
+                    if (!addingToCart) {
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                      e.currentTarget.style.boxShadow =
+                        "0 15px 32px rgba(79,70,229,0.30)";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow =
+                      "0 11px 26px rgba(79,70,229,0.23)";
+                  }}
                 >
                   {addingToCart
                     ? "Adding to Cart..."
@@ -485,53 +503,68 @@ function ProductDetails() {
 
 const pageStyle = {
   minHeight: "100vh",
-  backgroundColor: "#f7f7f7",
-  fontFamily:
-    "Inter, Arial, sans-serif",
+  background:
+    "radial-gradient(circle at top left, rgba(99,102,241,0.11), transparent 28%), linear-gradient(180deg, #f8faff 0%, #f7f8fc 55%, #ffffff 100%)",
+  fontFamily: "Inter, Arial, sans-serif",
+  color: "#0f172a",
 };
 
 const mainStyle = {
-  maxWidth: "1200px",
+  maxWidth: "1240px",
   margin: "0 auto",
-  padding: "35px 24px 60px",
+  padding: "34px 24px 70px",
 };
 
 const backButtonStyle = {
-  padding: "10px 16px",
-  border: "1px solid #ddd",
-  borderRadius: "8px",
-  backgroundColor: "white",
-  color: "#333",
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "7px",
+  padding: "10px 15px",
+  border: "1px solid #e2e8f0",
+  borderRadius: "999px",
+  backgroundColor: "rgba(255,255,255,0.88)",
+  color: "#475569",
   cursor: "pointer",
-  fontSize: "14px",
-  marginBottom: "25px",
+  fontSize: "12px",
+  fontWeight: "750",
+  marginBottom: "20px",
+  boxShadow: "0 5px 18px rgba(15,23,42,0.05)",
 };
 
 const productContainerStyle = {
   display: "grid",
-  gridTemplateColumns:
-    "minmax(0, 1.05fr) minmax(0, 0.95fr)",
-  gap: "55px",
-  padding: "35px",
-  backgroundColor: "white",
-  borderRadius: "16px",
-  boxShadow:
-    "0 5px 25px rgba(0,0,0,0.07)",
+  gridTemplateColumns: "minmax(0, 1.05fr) minmax(390px, 0.95fr)",
+  gap: "46px",
+  padding: "28px",
+  background:
+    "linear-gradient(145deg, rgba(255,255,255,0.98), rgba(248,250,255,0.97))",
+  border: "1px solid #e2e8f0",
+  borderRadius: "26px",
+  boxShadow: "0 20px 60px rgba(15,23,42,0.09)",
 };
 
 const imageSectionStyle = {
   position: "relative",
   width: "100%",
-  height: "500px",
-  backgroundColor: "#f3f3f3",
-  borderRadius: "12px",
+  height: "560px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  background:
+    "radial-gradient(circle at center, #ffffff 0%, #eef2ff 72%, #e0e7ff 100%)",
+  border: "1px solid #e0e7ff",
+  borderRadius: "22px",
   overflow: "hidden",
+  boxShadow: "inset 0 0 45px rgba(99,102,241,0.06)",
 };
 
 const imageStyle = {
   width: "100%",
   height: "100%",
   objectFit: "contain",
+  padding: "24px",
+  boxSizing: "border-box",
+  transition: "transform 0.35s ease",
 };
 
 const noImageStyle = {
@@ -541,157 +574,192 @@ const noImageStyle = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  color: "#888",
+  color: "#94a3b8",
   gap: "12px",
+  fontSize: "13px",
 };
 
 const noImageIconStyle = {
-  fontSize: "50px",
+  fontSize: "58px",
 };
 
 const outOfStockBadgeStyle = {
   position: "absolute",
   top: "18px",
   left: "18px",
-  padding: "8px 13px",
-  backgroundColor: "#222",
+  zIndex: 2,
+  padding: "8px 12px",
+  backgroundColor: "#0f172a",
   color: "white",
-  borderRadius: "20px",
-  fontSize: "11px",
-  fontWeight: "700",
-  letterSpacing: "0.5px",
+  borderRadius: "999px",
+  fontSize: "10px",
+  fontWeight: "850",
+  letterSpacing: "0.6px",
+  boxShadow: "0 8px 20px rgba(15,23,42,0.18)",
 };
 
 const detailsSectionStyle = {
-  padding: "5px 0",
+  padding: "8px 4px",
 };
 
 const categoryBadgeStyle = {
-  display: "inline-block",
-  padding: "6px 11px",
-  backgroundColor: "#f0f0f0",
-  borderRadius: "20px",
-  color: "#555",
-  fontSize: "12px",
-  fontWeight: "700",
+  display: "inline-flex",
+  alignItems: "center",
+  padding: "7px 11px",
+  backgroundColor: "#eef2ff",
+  border: "1px solid #e0e7ff",
+  borderRadius: "999px",
+  color: "#4f46e5",
+  fontSize: "10px",
+  fontWeight: "850",
   textTransform: "uppercase",
-  letterSpacing: "0.5px",
+  letterSpacing: "0.7px",
 };
 
 const nameStyle = {
-  fontSize: "40px",
-  lineHeight: "1.15",
-  margin: "15px 0 10px",
+  fontSize: "clamp(32px, 4vw, 46px)",
+  lineHeight: "1.08",
+  margin: "17px 0 11px",
+  color: "#0f172a",
+  fontWeight: "900",
+  letterSpacing: "-1.5px",
 };
 
 const ratingStyle = {
-  display: "flex",
+  display: "inline-flex",
   alignItems: "center",
   gap: "8px",
-  fontSize: "14px",
+  padding: "7px 10px",
+  borderRadius: "999px",
+  backgroundColor: "#fffbeb",
+  border: "1px solid #fde68a",
+  color: "#a16207",
+  fontSize: "12px",
+  fontWeight: "750",
 };
 
 const reviewStyle = {
-  color: "#777",
+  color: "#64748b",
+  fontWeight: "600",
 };
 
 const dividerStyle = {
   height: "1px",
-  backgroundColor: "#eee",
-  margin: "22px 0",
+  background:
+    "linear-gradient(90deg, #e2e8f0, #c7d2fe, transparent)",
+  margin: "23px 0",
 };
 
 const descriptionStyle = {
-  color: "#555",
-  lineHeight: "1.75",
-  fontSize: "16px",
+  color: "#64748b",
+  lineHeight: "1.8",
+  fontSize: "15px",
   margin: 0,
 };
 
 const priceContainerStyle = {
   marginTop: "25px",
+  display: "flex",
+  alignItems: "baseline",
+  gap: "8px",
 };
 
 const priceStyle = {
-  fontSize: "34px",
-  fontWeight: "700",
+  fontSize: "38px",
+  fontWeight: "900",
+  color: "#4f46e5",
+  letterSpacing: "-1px",
 };
 
 const stockBoxStyle = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
+  gap: "12px",
   marginTop: "18px",
-  padding: "12px 14px",
-  borderRadius: "8px",
-  backgroundColor: "#f3f3f3",
-  color: "#333",
-  fontSize: "13px",
-  fontWeight: "600",
+  padding: "13px 15px",
+  borderRadius: "13px",
+  backgroundColor: "#ecfdf5",
+  border: "1px solid #bbf7d0",
+  color: "#15803d",
+  fontSize: "12px",
+  fontWeight: "750",
 };
 
 const outOfStockBoxStyle = {
-  backgroundColor: "#eeeeee",
+  backgroundColor: "#fff1f2",
+  borderColor: "#fecdd3",
+  color: "#be123c",
 };
 
 const quantitySectionStyle = {
   display: "flex",
   alignItems: "center",
-  gap: "15px",
-  marginTop: "25px",
+  gap: "14px",
+  marginTop: "24px",
   flexWrap: "wrap",
 };
 
 const quantityLabelStyle = {
-  fontWeight: "700",
-  fontSize: "14px",
+  fontWeight: "800",
+  fontSize: "13px",
+  color: "#334155",
 };
 
 const quantityControlsStyle = {
   display: "flex",
   alignItems: "center",
-  border: "1px solid #ddd",
-  borderRadius: "8px",
+  border: "1px solid #dbe2ea",
+  borderRadius: "12px",
   overflow: "hidden",
+  backgroundColor: "white",
+  boxShadow: "0 4px 12px rgba(15,23,42,0.05)",
 };
 
 const quantityButtonStyle = {
-  width: "42px",
-  height: "42px",
+  width: "43px",
+  height: "43px",
   border: "none",
-  backgroundColor: "#f5f5f5",
+  backgroundColor: "#f8fafc",
+  color: "#334155",
   fontSize: "20px",
+  fontWeight: "700",
   cursor: "pointer",
 };
 
 const disabledQuantityButtonStyle = {
-  color: "#aaa",
+  color: "#cbd5e1",
   cursor: "not-allowed",
 };
 
 const quantityStyle = {
   width: "48px",
   textAlign: "center",
-  fontSize: "16px",
-  fontWeight: "600",
+  fontSize: "15px",
+  fontWeight: "850",
+  color: "#0f172a",
 };
 
 const quantityHintStyle = {
-  color: "#888",
-  fontSize: "12px",
+  color: "#94a3b8",
+  fontSize: "11px",
+  fontWeight: "650",
 };
 
 const addToCartButtonStyle = {
   width: "100%",
-  padding: "15px",
-  marginTop: "22px",
+  padding: "16px",
+  marginTop: "21px",
   border: "none",
-  borderRadius: "9px",
-  backgroundColor: "#222",
+  borderRadius: "13px",
+  background:
+    "linear-gradient(135deg, #2563eb 0%, #4f46e5 48%, #7c3aed 100%)",
   color: "white",
-  fontSize: "16px",
-  fontWeight: "700",
+  fontSize: "15px",
+  fontWeight: "850",
   cursor: "pointer",
+  boxShadow: "0 11px 26px rgba(79,70,229,0.23)",
+  transition: "transform 0.2s ease, box-shadow 0.2s ease",
 };
 
 const loadingButtonStyle = {
@@ -701,14 +769,14 @@ const loadingButtonStyle = {
 
 const outOfStockButtonStyle = {
   width: "100%",
-  padding: "15px",
-  marginTop: "22px",
+  padding: "16px",
+  marginTop: "21px",
   border: "none",
-  borderRadius: "9px",
-  backgroundColor: "#999",
+  borderRadius: "13px",
+  backgroundColor: "#94a3b8",
   color: "white",
-  fontSize: "16px",
-  fontWeight: "700",
+  fontSize: "15px",
+  fontWeight: "800",
   cursor: "not-allowed",
 };
 
@@ -717,35 +785,41 @@ const successMessageStyle = {
   justifyContent: "space-between",
   alignItems: "center",
   gap: "10px",
-  marginTop: "15px",
-  padding: "12px 14px",
-  backgroundColor: "#f0f7f2",
-  color: "#287a43",
-  borderRadius: "8px",
-  fontSize: "13px",
+  marginTop: "14px",
+  padding: "13px 14px",
+  backgroundColor: "#ecfdf5",
+  color: "#15803d",
+  border: "1px solid #bbf7d0",
+  borderRadius: "12px",
+  fontSize: "12px",
+  fontWeight: "700",
   flexWrap: "wrap",
 };
 
 const viewCartButtonStyle = {
   border: "none",
   backgroundColor: "transparent",
-  color: "#222",
-  fontWeight: "700",
+  color: "#4f46e5",
+  fontWeight: "850",
   cursor: "pointer",
+  fontSize: "12px",
 };
 
 const cartErrorStyle = {
-  marginTop: "15px",
-  padding: "12px 14px",
-  backgroundColor: "#f5eeee",
-  color: "#9b3030",
-  borderRadius: "8px",
-  fontSize: "13px",
+  marginTop: "14px",
+  padding: "13px 14px",
+  backgroundColor: "#fff1f2",
+  color: "#be123c",
+  border: "1px solid #fecdd3",
+  borderRadius: "12px",
+  fontSize: "12px",
+  fontWeight: "650",
 };
 
 const infoSectionStyle = {
-  marginTop: "28px",
-  borderTop: "1px solid #eee",
+  marginTop: "25px",
+  padding: "18px 0 0",
+  borderTop: "1px solid #e2e8f0",
 };
 
 const infoRowStyle = {
@@ -754,9 +828,9 @@ const infoRowStyle = {
   alignItems: "center",
   gap: "20px",
   padding: "13px 0",
-  borderBottom: "1px solid #eee",
-  fontSize: "13px",
-  color: "#666",
+  borderBottom: "1px solid #eef2f7",
+  fontSize: "12px",
+  color: "#94a3b8",
 };
 
 const productIdStyle = {
@@ -764,54 +838,65 @@ const productIdStyle = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
-  color: "#777",
+  color: "#64748b",
+  fontSize: "11px",
 };
 
 const buttonStyle = {
   padding: "12px 20px",
   marginTop: "10px",
   border: "none",
-  borderRadius: "8px",
-  backgroundColor: "#222",
+  borderRadius: "11px",
+  background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
   color: "white",
   cursor: "pointer",
+  fontSize: "13px",
+  fontWeight: "750",
+  boxShadow: "0 8px 20px rgba(79,70,229,0.20)",
 };
 
 const centerStyle = {
-  minHeight: "80vh",
+  minHeight: "100vh",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   padding: "20px",
-  fontFamily:
-    "Inter, Arial, sans-serif",
+  fontFamily: "Inter, Arial, sans-serif",
+  background:
+    "radial-gradient(circle at top, rgba(99,102,241,0.12), transparent 35%), #f8fafc",
 };
 
 const loadingCardStyle = {
   textAlign: "center",
+  padding: "45px",
+  backgroundColor: "white",
+  border: "1px solid #e0e7ff",
+  borderRadius: "22px",
+  boxShadow: "0 15px 45px rgba(15,23,42,0.08)",
 };
 
 const loadingIconStyle = {
-  fontSize: "40px",
+  fontSize: "48px",
 };
 
 const errorCardStyle = {
   maxWidth: "450px",
   textAlign: "center",
   padding: "45px",
-  backgroundColor: "white",
-  borderRadius: "14px",
-  boxShadow:
-    "0 4px 20px rgba(0,0,0,0.08)",
+  background:
+    "linear-gradient(145deg, #ffffff, #f8faff)",
+  border: "1px solid #e0e7ff",
+  borderRadius: "22px",
+  boxShadow: "0 18px 50px rgba(15,23,42,0.09)",
 };
 
 const errorIconStyle = {
-  fontSize: "40px",
+  fontSize: "44px",
 };
 
 const errorTextStyle = {
-  color: "#666",
-  lineHeight: "1.6",
+  color: "#64748b",
+  lineHeight: "1.65",
+  fontSize: "13px",
 };
-
 export default ProductDetails;

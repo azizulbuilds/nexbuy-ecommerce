@@ -228,12 +228,80 @@ function Checkout() {
     getTotalQuantity();
 
   return (
-    <div style={pageStyle}>
-      <main style={mainStyle}>
+    <div className="nexbuy-checkout-page" style={pageStyle}>
+
+      <style>{`
+        @keyframes nexCheckoutUp {
+          from { opacity: 0; transform: translateY(12px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nexbuy-checkout-page {
+          animation: nexCheckoutUp .45s ease both;
+        }
+
+        .nexbuy-checkout-form input:focus,
+        .nexbuy-checkout-form textarea:focus {
+          border-color: #818cf8 !important;
+          background: #ffffff !important;
+          box-shadow: 0 0 0 4px rgba(99,102,241,0.09) !important;
+        }
+
+        .nexbuy-checkout-form button:not(:disabled):hover {
+          transform: translateY(-1px);
+        }
+
+        .nexbuy-checkout-summary {
+          animation: nexCheckoutUp .55s ease both;
+        }
+
+        @media (max-width: 900px) {
+          .nexbuy-checkout-layout {
+            grid-template-columns: 1fr !important;
+          }
+
+          .nexbuy-checkout-summary {
+            position: relative !important;
+            top: auto !important;
+          }
+        }
+
+        @media (max-width: 650px) {
+          .nexbuy-checkout-main {
+            padding: 20px 13px 45px !important;
+          }
+
+          .nexbuy-checkout-header {
+            grid-template-columns: 1fr !important;
+            text-align: center;
+            gap: 12px !important;
+          }
+
+          .nexbuy-checkout-header button,
+          .nexbuy-checkout-header > div {
+            justify-self: center !important;
+          }
+
+          .nexbuy-checkout-form {
+            padding: 21px !important;
+            border-radius: 19px !important;
+          }
+
+          .nexbuy-checkout-summary {
+            padding: 21px !important;
+            border-radius: 19px !important;
+          }
+
+          .nexbuy-checkout-form .nexbuy-two-column {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
+      <main className="nexbuy-checkout-main" style={mainStyle}>
         {/* ==========================================
             Checkout Header
         ========================================== */}
-        <div style={pageHeaderStyle}>
+        <div className="nexbuy-checkout-header" style={pageHeaderStyle}>
           <button
             onClick={() =>
               navigate("/cart")
@@ -261,12 +329,13 @@ function Checkout() {
           </div>
         )}
 
-        <div style={checkoutLayoutStyle}>
+        <div className="nexbuy-checkout-layout" style={checkoutLayoutStyle}>
           {/* ==========================================
               Checkout Form
           ========================================== */}
           <form
             onSubmit={handlePlaceOrder}
+            className="nexbuy-checkout-form"
             style={formStyle}
           >
             {/* Shipping */}
@@ -330,7 +399,7 @@ function Checkout() {
             />
 
             {/* City + State */}
-            <div style={twoColumnStyle}>
+            <div className="nexbuy-two-column" style={twoColumnStyle}>
               <div>
                 <label style={labelStyle}>
                   City
@@ -367,7 +436,7 @@ function Checkout() {
             </div>
 
             {/* Postal + Country */}
-            <div style={twoColumnStyle}>
+            <div className="nexbuy-two-column" style={twoColumnStyle}>
               <div>
                 <label style={labelStyle}>
                   Postal Code
@@ -599,7 +668,7 @@ function Checkout() {
           {/* ==========================================
               Order Summary
           ========================================== */}
-          <aside style={summaryStyle}>
+          <aside className="nexbuy-checkout-summary" style={summaryStyle}>
             <h2
               style={
                 summaryTitleStyle
@@ -798,235 +867,292 @@ function Checkout() {
   );
 }
 
+
 // ==========================================
-// Page
+// Premium Nexbuy Checkout Design System
 // ==========================================
 
 const pageStyle = {
   minHeight: "100vh",
-  backgroundColor: "#f7f7f7",
+  background:
+    "radial-gradient(circle at 4% 2%, rgba(99,102,241,0.12), transparent 28%), radial-gradient(circle at 96% 20%, rgba(168,85,247,0.10), transparent 27%), #f6f7fb",
+  color: "#172033",
   fontFamily:
-    "Inter, Arial, sans-serif",
+    "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
 };
 
 const mainStyle = {
-  maxWidth: "1200px",
+  maxWidth: "1180px",
   margin: "0 auto",
-  padding: "35px 24px 60px",
+  padding: "32px 22px 70px",
 };
 
 const pageHeaderStyle = {
-  display: "flex",
-  justifyContent: "space-between",
+  display: "grid",
+  gridTemplateColumns: "1fr auto 1fr",
   alignItems: "center",
   gap: "20px",
-  marginBottom: "30px",
-  flexWrap: "wrap",
+  marginBottom: "27px",
 };
 
 const backButtonStyle = {
-  border: "none",
-  backgroundColor: "transparent",
-  padding: 0,
-  color: "#555",
+  justifySelf: "start",
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "7px",
+  border: "1px solid #e1e4ed",
+  background: "rgba(255,255,255,0.78)",
+  padding: "10px 14px",
+  borderRadius: "12px",
+  color: "#566075",
   cursor: "pointer",
-  fontSize: "14px",
+  fontSize: "12px",
+  fontWeight: "800",
+  boxShadow: "0 6px 18px rgba(31,41,55,0.045)",
+  transition: "all .2s ease",
 };
 
 const titleStyle = {
   margin: 0,
-  fontSize: "34px",
-  fontWeight: "700",
+  textAlign: "center",
+  color: "#182033",
+  fontSize: "clamp(27px, 4vw, 36px)",
+  fontWeight: "900",
+  letterSpacing: "-1.2px",
 };
 
 const secureBadgeStyle = {
-  padding: "8px 12px",
-  backgroundColor: "#f0f7f2",
-  color: "#287a43",
-  borderRadius: "20px",
-  fontSize: "12px",
-  fontWeight: "600",
+  justifySelf: "end",
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "7px",
+  padding: "9px 13px",
+  background: "#ecfdf3",
+  color: "#207346",
+  border: "1px solid #ccefd9",
+  borderRadius: "999px",
+  fontSize: "11px",
+  fontWeight: "900",
+  boxShadow: "0 7px 18px rgba(32,115,70,0.07)",
 };
 
 const errorBoxStyle = {
-  marginBottom: "20px",
+  display: "flex",
+  alignItems: "center",
+  gap: "9px",
+  marginBottom: "18px",
   padding: "13px 16px",
-  backgroundColor: "#fff0f0",
-  color: "#a52828",
-  borderRadius: "8px",
-  fontSize: "14px",
+  background: "#fff1f2",
+  border: "1px solid #ffd3d9",
+  color: "#ad2738",
+  borderRadius: "13px",
+  fontSize: "13px",
+  fontWeight: "700",
+  boxShadow: "0 8px 22px rgba(173,39,56,0.05)",
 };
 
 const checkoutLayoutStyle = {
   display: "grid",
-  gridTemplateColumns:
-    "minmax(0, 1fr) 360px",
-  gap: "25px",
+  gridTemplateColumns: "minmax(0, 1fr) 390px",
+  gap: "22px",
   alignItems: "start",
 };
 
 const formStyle = {
-  backgroundColor: "white",
-  padding: "30px",
-  borderRadius: "14px",
-  boxShadow:
-    "0 3px 15px rgba(0,0,0,0.06)",
+  background: "rgba(255,255,255,0.94)",
+  padding: "29px",
+  border: "1px solid #e5e7ef",
+  borderRadius: "23px",
+  boxShadow: "0 18px 45px rgba(31,41,55,0.065)",
 };
 
 const sectionHeaderStyle = {
   display: "flex",
   alignItems: "center",
-  gap: "14px",
-  marginBottom: "20px",
+  gap: "13px",
+  marginBottom: "18px",
 };
 
 const sectionNumberStyle = {
-  width: "32px",
-  height: "32px",
+  width: "36px",
+  height: "36px",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   flexShrink: 0,
-  borderRadius: "50%",
-  backgroundColor: "#222",
+  borderRadius: "12px",
+  background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
   color: "white",
-  fontWeight: "700",
-  fontSize: "14px",
+  fontWeight: "900",
+  fontSize: "13px",
+  boxShadow: "0 9px 20px rgba(99,102,241,0.22)",
 };
 
 const sectionTitleStyle = {
   margin: 0,
-  fontSize: "20px",
+  color: "#20283a",
+  fontSize: "19px",
+  letterSpacing: "-0.35px",
 };
 
 const sectionSubtitleStyle = {
   margin: "4px 0 0",
-  color: "#777",
-  fontSize: "13px",
+  color: "#8991a3",
+  fontSize: "12px",
+  lineHeight: 1.5,
 };
 
 const labelStyle = {
   display: "block",
   marginTop: "17px",
   marginBottom: "7px",
-  color: "#333",
-  fontSize: "13px",
-  fontWeight: "700",
+  color: "#30384b",
+  fontSize: "12px",
+  fontWeight: "800",
 };
 
 const inputStyle = {
   width: "100%",
   boxSizing: "border-box",
-  padding: "12px 13px",
-  border: "1px solid #ddd",
-  borderRadius: "8px",
+  padding: "13px 14px",
+  border: "1px solid #dfe3ec",
+  borderRadius: "12px",
   outline: "none",
-  fontSize: "14px",
-  backgroundColor: "white",
+  fontSize: "13px",
+  background: "#fbfcfe",
+  color: "#20283a",
+  transition: "all .2s ease",
 };
 
 const textareaStyle = {
   width: "100%",
   boxSizing: "border-box",
-  padding: "12px 13px",
-  border: "1px solid #ddd",
-  borderRadius: "8px",
+  padding: "13px 14px",
+  border: "1px solid #dfe3ec",
+  borderRadius: "12px",
   outline: "none",
-  fontSize: "14px",
+  fontSize: "13px",
   resize: "vertical",
   fontFamily:
-    "Inter, Arial, sans-serif",
+    "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+  background: "#fbfcfe",
+  color: "#20283a",
 };
 
 const twoColumnStyle = {
   display: "grid",
-  gridTemplateColumns:
-    "1fr 1fr",
-  gap: "15px",
+  gridTemplateColumns: "1fr 1fr",
+  gap: "14px",
 };
 
 const paymentOptionStyle = {
+  position: "relative",
   display: "flex",
   alignItems: "flex-start",
   gap: "12px",
   padding: "16px",
-  marginTop: "12px",
-  border: "1px solid #ddd",
-  borderRadius: "10px",
+  marginTop: "11px",
+  border: "1px solid #e1e4ec",
+  borderRadius: "15px",
+  background: "#fbfcfe",
   cursor: "pointer",
+  transition: "all .2s ease",
 };
 
 const selectedPaymentStyle = {
-  border: "2px solid #222",
-  backgroundColor: "#fafafa",
+  border: "1.5px solid #6366f1",
+  background: "linear-gradient(135deg, #f5f3ff, #f8f7ff)",
+  boxShadow: "0 9px 22px rgba(99,102,241,0.09)",
 };
 
 const paymentContentStyle = {
   flex: 1,
+  minWidth: 0,
 };
 
 const paymentTitleRowStyle = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  fontSize: "15px",
+  gap: "10px",
+  color: "#20283a",
+  fontSize: "14px",
 };
 
 const paymentIconStyle = {
-  fontSize: "20px",
+  width: "34px",
+  height: "34px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: "10px",
+  background: "white",
+  border: "1px solid #e5e7ef",
+  fontSize: "17px",
+  boxShadow: "0 5px 12px rgba(31,41,55,0.05)",
 };
 
 const paymentDescriptionStyle = {
   display: "block",
   marginTop: "5px",
-  color: "#777",
-  fontSize: "12px",
-  lineHeight: "1.5",
+  color: "#7e8799",
+  fontSize: "11px",
+  lineHeight: "1.55",
 };
 
 const placeOrderButtonStyle = {
   width: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   padding: "15px",
   marginTop: "25px",
   border: "none",
-  borderRadius: "9px",
-  backgroundColor: "#222",
+  borderRadius: "13px",
+  background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
   color: "white",
-  fontSize: "16px",
-  fontWeight: "700",
+  fontSize: "14px",
+  fontWeight: "900",
   cursor: "pointer",
+  boxShadow: "0 13px 28px rgba(99,102,241,0.24)",
+  transition: "all .2s ease",
 };
 
 const disabledOrderButtonStyle = {
-  opacity: 0.65,
+  opacity: 0.62,
   cursor: "wait",
+  boxShadow: "none",
 };
 
 const formSecurityStyle = {
   margin: "15px 0 0",
   textAlign: "center",
-  color: "#888",
-  fontSize: "11px",
+  color: "#949bab",
+  fontSize: "10px",
+  fontWeight: "600",
 };
 
 const summaryStyle = {
-  backgroundColor: "white",
+  background:
+    "linear-gradient(150deg, #151b31 0%, #202747 62%, #31245e 100%)",
+  color: "white",
   padding: "25px",
-  borderRadius: "14px",
-  boxShadow:
-    "0 3px 15px rgba(0,0,0,0.06)",
+  borderRadius: "23px",
+  border: "1px solid rgba(255,255,255,0.09)",
+  boxShadow: "0 22px 48px rgba(15,23,42,0.18)",
   position: "sticky",
   top: "20px",
 };
 
 const summaryTitleStyle = {
   margin: 0,
-  fontSize: "21px",
+  fontSize: "20px",
+  letterSpacing: "-0.4px",
 };
 
 const summaryDividerStyle = {
   height: "1px",
-  backgroundColor: "#eee",
+  background: "rgba(255,255,255,0.12)",
   margin: "18px 0",
 };
 
@@ -1044,14 +1170,15 @@ const summaryItemStyle = {
 
 const summaryImageContainerStyle = {
   position: "relative",
-  width: "55px",
-  height: "55px",
+  width: "59px",
+  height: "59px",
   flexShrink: 0,
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  backgroundColor: "#f3f3f3",
-  borderRadius: "8px",
+  background: "rgba(255,255,255,0.09)",
+  border: "1px solid rgba(255,255,255,0.10)",
+  borderRadius: "13px",
   overflow: "visible",
 };
 
@@ -1059,24 +1186,25 @@ const summaryImageStyle = {
   width: "100%",
   height: "100%",
   objectFit: "contain",
-  borderRadius: "8px",
+  borderRadius: "12px",
 };
 
 const quantityBadgeStyle = {
   position: "absolute",
   top: "-7px",
   right: "-7px",
-  minWidth: "20px",
-  height: "20px",
+  minWidth: "21px",
+  height: "21px",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   padding: "0 4px",
   borderRadius: "50%",
-  backgroundColor: "#222",
+  background: "linear-gradient(135deg, #818cf8, #a78bfa)",
   color: "white",
-  fontSize: "10px",
-  fontWeight: "700",
+  fontSize: "9px",
+  fontWeight: "900",
+  border: "2px solid #202747",
 };
 
 const summaryProductStyle = {
@@ -1085,36 +1213,37 @@ const summaryProductStyle = {
   flex: 1,
   minWidth: 0,
   gap: "4px",
-  fontSize: "13px",
+  fontSize: "12px",
 };
 
 const summaryQuantityStyle = {
-  color: "#777",
-  fontSize: "11px",
+  color: "rgba(255,255,255,0.55)",
+  fontSize: "10px",
 };
 
 const summaryItemPriceStyle = {
+  color: "white",
   fontSize: "13px",
   whiteSpace: "nowrap",
 };
 
 const summaryRowsStyle = {
   marginTop: "20px",
-  paddingTop: "10px",
-  borderTop: "1px solid #eee",
+  paddingTop: "11px",
+  borderTop: "1px solid rgba(255,255,255,0.10)",
 };
 
 const summaryRowStyle = {
   display: "flex",
   justifyContent: "space-between",
-  padding: "9px 0",
-  color: "#666",
-  fontSize: "13px",
+  padding: "8px 0",
+  color: "rgba(255,255,255,0.62)",
+  fontSize: "12px",
 };
 
 const freeShippingStyle = {
-  color: "#287a43",
-  fontWeight: "700",
+  color: "#86efac",
+  fontWeight: "900",
 };
 
 const totalRowStyle = {
@@ -1123,77 +1252,111 @@ const totalRowStyle = {
   alignItems: "center",
   marginTop: "12px",
   paddingTop: "18px",
-  borderTop: "2px solid #222",
-  fontSize: "17px",
+  borderTop: "1px solid rgba(255,255,255,0.16)",
+  fontSize: "16px",
 };
 
 const totalPriceStyle = {
-  fontSize: "23px",
+  fontSize: "25px",
+  color: "#c4b5fd",
+  letterSpacing: "-0.5px",
 };
 
 const paymentSummaryStyle = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
+  gap: "10px",
   marginTop: "18px",
-  padding: "12px",
-  backgroundColor: "#f7f7f7",
-  borderRadius: "8px",
-  color: "#666",
-  fontSize: "12px",
+  padding: "13px",
+  background: "rgba(255,255,255,0.07)",
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: "12px",
+  color: "rgba(255,255,255,0.58)",
+  fontSize: "11px",
 };
 
 const emptyCardStyle = {
-  maxWidth: "450px",
-  padding: "50px 35px",
+  width: "100%",
+  maxWidth: "460px",
+  padding: "48px 32px",
   textAlign: "center",
-  backgroundColor: "white",
-  borderRadius: "14px",
-  boxShadow:
-    "0 4px 20px rgba(0,0,0,0.07)",
+  background: "rgba(255,255,255,0.95)",
+  border: "1px solid #e6e8ef",
+  borderRadius: "24px",
+  boxShadow: "0 22px 55px rgba(31,41,55,0.10)",
 };
 
 const emptyIconStyle = {
-  fontSize: "60px",
+  width: "78px",
+  height: "78px",
+  margin: "0 auto 18px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: "25px",
+  background: "linear-gradient(135deg, #eef2ff, #f3e8ff)",
+  fontSize: "38px",
 };
 
 const emptyTextStyle = {
-  color: "#777",
-  lineHeight: "1.6",
+  color: "#7a8294",
+  lineHeight: "1.65",
+  fontSize: "13px",
 };
 
 const buttonStyle = {
-  padding: "12px 22px",
+  padding: "13px 23px",
   marginTop: "15px",
   border: "none",
-  borderRadius: "8px",
-  backgroundColor: "#222",
+  borderRadius: "12px",
+  background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
   color: "white",
   cursor: "pointer",
-  fontSize: "14px",
-  fontWeight: "600",
+  fontSize: "13px",
+  fontWeight: "800",
+  boxShadow: "0 10px 22px rgba(99,102,241,0.20)",
 };
 
 const centerStyle = {
-  minHeight: "80vh",
+  minHeight: "100vh",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   padding: "20px",
+  background:
+    "radial-gradient(circle at 20% 10%, rgba(99,102,241,0.11), transparent 30%), #f6f7fb",
   fontFamily:
-    "Inter, Arial, sans-serif",
+    "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
 };
 
 const loadingCardStyle = {
+  width: "100%",
+  maxWidth: "430px",
+  padding: "43px 30px",
   textAlign: "center",
+  background: "rgba(255,255,255,0.95)",
+  border: "1px solid #e6e8ef",
+  borderRadius: "24px",
+  boxShadow: "0 22px 55px rgba(31,41,55,0.09)",
 };
 
 const loadingIconStyle = {
-  fontSize: "45px",
+  width: "72px",
+  height: "72px",
+  margin: "0 auto 18px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: "23px",
+  background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+  fontSize: "34px",
+  boxShadow: "0 14px 28px rgba(99,102,241,0.22)",
 };
 
 const loadingTextStyle = {
-  color: "#777",
+  color: "#7b8395",
+  fontSize: "13px",
 };
 
 export default Checkout;

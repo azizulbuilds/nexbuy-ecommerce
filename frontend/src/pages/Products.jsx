@@ -304,12 +304,59 @@ function Products() {
             </button>
           </div>
         ) : (
-          <div style={gridStyle}>
+          <div>
+            <div style={collectionIntroStyle}>
+              <div>
+                <span style={collectionBadgeStyle}>
+                  ✦ CURATED FOR YOU
+                </span>
+                <h2 style={collectionTitleStyle}>
+                  Discover something you'll love
+                </h2>
+              </div>
+              <span style={collectionHintStyle}>
+                Tap any product to explore its details
+              </span>
+            </div>
+
+            <div style={gridStyle}>
             {filteredProducts.map(
               (product) => (
                 <div
                   key={product._id}
                   style={cardStyle}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform =
+                      "translateY(-8px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 20px 45px rgba(15,23,42,0.13)";
+                    e.currentTarget.style.borderColor =
+                      "#c7d2fe";
+
+                    const image =
+                      e.currentTarget.querySelector("img");
+
+                    if (image) {
+                      image.style.transform =
+                        "scale(1.06)";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform =
+                      "translateY(0)";
+                    e.currentTarget.style.boxShadow =
+                      "0 8px 25px rgba(15,23,42,0.07)";
+                    e.currentTarget.style.borderColor =
+                      "rgba(226,232,240,0.90)";
+
+                    const image =
+                      e.currentTarget.querySelector("img");
+
+                    if (image) {
+                      image.style.transform =
+                        "scale(1)";
+                    }
+                  }}
                 >
                   {/* Product Image */}
                   <div
@@ -444,6 +491,7 @@ function Products() {
               )
             )}
           </div>
+          </div>
         )}
       </main>
     </div>
@@ -456,67 +504,83 @@ function Products() {
 
 const pageStyle = {
   minHeight: "100vh",
-  backgroundColor: "#f7f7f7",
+  background:
+    "linear-gradient(180deg, #f8fafc 0%, #eef2ff 45%, #f8fafc 100%)",
   fontFamily:
     "Inter, Arial, sans-serif",
+  color: "#0f172a",
 };
 
 const mainStyle = {
-  maxWidth: "1250px",
+  maxWidth: "1280px",
   margin: "0 auto",
-  padding: "40px 24px 60px",
+  padding: "54px 24px 80px",
 };
 
 const pageHeaderStyle = {
+  position: "relative",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  gap: "20px",
-  marginBottom: "35px",
+  gap: "24px",
+  marginBottom: "30px",
+  padding: "38px 40px",
+  borderRadius: "24px",
+  overflow: "hidden",
   flexWrap: "wrap",
+  background:
+    "linear-gradient(135deg, #0f172a 0%, #312e81 58%, #4f46e5 100%)",
+  color: "white",
+  boxShadow: "0 20px 55px rgba(30, 41, 59, 0.18)",
 };
 
 const eyebrowStyle = {
   margin: 0,
-  fontSize: "12px",
-  fontWeight: "700",
-  letterSpacing: "2px",
-  color: "#777",
+  fontSize: "11px",
+  fontWeight: "800",
+  letterSpacing: "2.5px",
+  color: "#c7d2fe",
 };
 
 const titleStyle = {
-  margin: "8px 0 5px",
-  fontSize: "36px",
-  lineHeight: "1.15",
+  margin: "8px 0 8px",
+  fontSize: "clamp(34px, 5vw, 52px)",
+  lineHeight: "1.05",
+  letterSpacing: "-2px",
+  fontWeight: "800",
 };
 
 const subtitleStyle = {
   margin: 0,
-  color: "#666",
-  fontSize: "16px",
+  maxWidth: "620px",
+  color: "#dbeafe",
+  fontSize: "15px",
+  lineHeight: "1.7",
 };
 
 const profileButtonStyle = {
-  padding: "11px 18px",
-  border: "1px solid #222",
-  borderRadius: "8px",
-  backgroundColor: "#222",
+  padding: "12px 19px",
+  border: "1px solid rgba(255,255,255,0.22)",
+  borderRadius: "12px",
+  backgroundColor: "rgba(255,255,255,0.10)",
   color: "white",
   cursor: "pointer",
-  fontWeight: "600",
+  fontWeight: "700",
+  backdropFilter: "blur(10px)",
 };
 
 const filterSectionStyle = {
   display: "flex",
   gap: "12px",
   alignItems: "center",
-  padding: "18px",
-  backgroundColor: "white",
-  borderRadius: "12px",
-  boxShadow:
-    "0 3px 15px rgba(0,0,0,0.06)",
-  marginBottom: "20px",
+  padding: "14px",
+  backgroundColor: "rgba(255,255,255,0.86)",
+  border: "1px solid rgba(148,163,184,0.20)",
+  borderRadius: "18px",
+  boxShadow: "0 12px 35px rgba(15,23,42,0.08)",
+  marginBottom: "22px",
   flexWrap: "wrap",
+  backdropFilter: "blur(14px)",
 };
 
 const searchWrapperStyle = {
@@ -536,68 +600,114 @@ const searchIconStyle = {
 const searchInputStyle = {
   width: "100%",
   boxSizing: "border-box",
-  padding: "12px 14px 12px 40px",
-  border: "1px solid #ddd",
-  borderRadius: "8px",
+  padding: "13px 14px 13px 42px",
+  border: "1px solid #e2e8f0",
+  borderRadius: "12px",
+  backgroundColor: "#f8fafc",
+  color: "#0f172a",
   fontSize: "14px",
   outline: "none",
 };
 
 const selectStyle = {
-  padding: "12px 14px",
-  border: "1px solid #ddd",
-  borderRadius: "8px",
-  backgroundColor: "white",
+  padding: "13px 14px",
+  border: "1px solid #e2e8f0",
+  borderRadius: "12px",
+  backgroundColor: "#f8fafc",
+  color: "#334155",
   fontSize: "14px",
   cursor: "pointer",
-  minWidth: "160px",
+  minWidth: "170px",
+  outline: "none",
 };
 
 const clearButtonStyle = {
-  padding: "12px 16px",
-  border: "1px solid #222",
-  borderRadius: "8px",
+  padding: "13px 17px",
+  border: "1px solid #cbd5e1",
+  borderRadius: "12px",
   backgroundColor: "white",
-  color: "#222",
+  color: "#334155",
   cursor: "pointer",
-  fontWeight: "600",
+  fontWeight: "700",
 };
 
 const resultBarStyle = {
   display: "flex",
   justifyContent: "space-between",
-  marginBottom: "20px",
-  color: "#666",
-  fontSize: "14px",
+  marginBottom: "18px",
+  padding: "0 4px",
+  color: "#64748b",
+  fontSize: "13px",
+};
+
+const collectionIntroStyle = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "flex-end",
+  gap: "20px",
+  margin: "10px 0 20px",
+  flexWrap: "wrap",
+};
+
+const collectionBadgeStyle = {
+  display: "inline-block",
+  marginBottom: "8px",
+  color: "#6366f1",
+  fontSize: "10px",
+  fontWeight: "900",
+  letterSpacing: "1.8px",
+};
+
+const collectionTitleStyle = {
+  margin: 0,
+  color: "#0f172a",
+  fontSize: "clamp(22px, 3vw, 30px)",
+  lineHeight: "1.15",
+  letterSpacing: "-0.8px",
+};
+
+const collectionHintStyle = {
+  color: "#64748b",
+  fontSize: "12px",
 };
 
 const gridStyle = {
   display: "grid",
   gridTemplateColumns:
-    "repeat(auto-fill, minmax(260px, 1fr))",
-  gap: "24px",
+    "repeat(auto-fill, minmax(270px, 1fr))",
+  gap: "26px",
 };
 
 const cardStyle = {
-  backgroundColor: "white",
-  borderRadius: "12px",
+  position: "relative",
+  backgroundColor: "rgba(255,255,255,0.96)",
+  border: "1px solid rgba(226,232,240,0.90)",
+  borderRadius: "20px",
   overflow: "hidden",
-  boxShadow:
-    "0 3px 15px rgba(0,0,0,0.07)",
-  transition: "transform 0.2s ease",
+  boxShadow: "0 8px 25px rgba(15,23,42,0.07)",
+  transition:
+    "transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease",
 };
 
 const imageContainerStyle = {
   position: "relative",
   width: "100%",
-  height: "240px",
-  backgroundColor: "#eeeeee",
+  height: "260px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  overflow: "hidden",
+  background:
+    "linear-gradient(145deg, #f8fafc 0%, #eef2ff 55%, #e0e7ff 100%)",
 };
 
 const imageStyle = {
   width: "100%",
   height: "100%",
-  objectFit: "cover",
+  padding: "20px",
+  boxSizing: "border-box",
+  objectFit: "contain",
+  transition: "transform 0.4s ease",
 };
 
 const noImageStyle = {
@@ -607,7 +717,7 @@ const noImageStyle = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  color: "#888",
+  color: "#64748b",
   gap: "8px",
 };
 
@@ -617,41 +727,47 @@ const noImageIconStyle = {
 
 const outOfStockBadgeStyle = {
   position: "absolute",
-  top: "12px",
-  right: "12px",
-  padding: "6px 10px",
-  backgroundColor: "#222",
+  top: "14px",
+  right: "14px",
+  padding: "7px 11px",
+  backgroundColor: "#0f172a",
   color: "white",
-  borderRadius: "20px",
-  fontSize: "11px",
-  fontWeight: "700",
+  borderRadius: "999px",
+  fontSize: "10px",
+  fontWeight: "800",
+  boxShadow: "0 6px 15px rgba(15,23,42,0.18)",
 };
 
 const cardContentStyle = {
-  padding: "20px",
+  padding: "21px",
 };
 
 const categoryBadgeStyle = {
   display: "inline-block",
-  padding: "5px 9px",
-  backgroundColor: "#f0f0f0",
-  borderRadius: "20px",
-  fontSize: "11px",
-  fontWeight: "600",
-  color: "#555",
-  marginBottom: "10px",
+  padding: "6px 10px",
+  backgroundColor: "#eef2ff",
+  border: "1px solid #e0e7ff",
+  borderRadius: "999px",
+  fontSize: "10px",
+  fontWeight: "800",
+  color: "#4f46e5",
+  marginBottom: "11px",
+  textTransform: "uppercase",
+  letterSpacing: "0.7px",
 };
 
 const productNameStyle = {
   margin: "0 0 8px",
-  fontSize: "20px",
+  color: "#0f172a",
+  fontSize: "19px",
   lineHeight: "1.3",
+  letterSpacing: "-0.3px",
 };
 
 const descriptionStyle = {
-  color: "#666",
-  fontSize: "14px",
-  lineHeight: "1.5",
+  color: "#64748b",
+  fontSize: "13px",
+  lineHeight: "1.6",
   minHeight: "63px",
   margin: "0",
 };
@@ -665,34 +781,47 @@ const bottomRowStyle = {
 };
 
 const priceStyle = {
+  color: "#111827",
   fontSize: "22px",
+  letterSpacing: "-0.5px",
 };
 
 const stockStyle = {
-  fontSize: "12px",
-  color: "#555",
+  padding: "5px 8px",
+  borderRadius: "8px",
+  backgroundColor: "#ecfdf5",
+  color: "#059669",
+  fontSize: "10px",
+  fontWeight: "700",
   textAlign: "right",
 };
 
 const lowStockTextStyle = {
-  fontWeight: "700",
+  fontWeight: "800",
+  backgroundColor: "#fff7ed",
+  color: "#ea580c",
 };
 
 const outOfStockTextStyle = {
-  fontWeight: "700",
+  fontWeight: "800",
+  backgroundColor: "#fef2f2",
+  color: "#dc2626",
 };
 
 const buttonStyle = {
   width: "100%",
-  padding: "12px",
+  padding: "13px",
   marginTop: "18px",
   border: "none",
-  borderRadius: "8px",
-  backgroundColor: "#222",
+  borderRadius: "11px",
+  background:
+    "linear-gradient(135deg, #4f46e5, #7c3aed)",
   color: "white",
-  fontSize: "14px",
-  fontWeight: "600",
+  fontSize: "13px",
+  fontWeight: "800",
   cursor: "pointer",
+  boxShadow: "0 8px 18px rgba(79,70,229,0.22)",
+  transition: "transform 0.2s ease, box-shadow 0.2s ease",
 };
 
 const disabledButtonStyle = {

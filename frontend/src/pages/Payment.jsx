@@ -455,6 +455,18 @@ function Payment() {
                 ? disabledPayButtonStyle
                 : {}),
             }}
+            onMouseEnter={(e) => {
+              if (!paymentLoading) {
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow =
+                  "0 16px 34px rgba(79,70,229,0.30)";
+              }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow =
+                "0 11px 28px rgba(79,70,229,0.24)";
+            }}
           >
             {paymentLoading
               ? "Opening Secure Checkout..."
@@ -508,87 +520,123 @@ function Payment() {
 
 const pageStyle = {
   minHeight: "100vh",
-  backgroundColor: "#f7f7f7",
-  fontFamily:
-    "Inter, Arial, sans-serif",
+  background:
+    "radial-gradient(circle at 15% 0%, rgba(99,102,241,0.14), transparent 28%), radial-gradient(circle at 90% 100%, rgba(124,58,237,0.12), transparent 30%), linear-gradient(180deg, #f8faff 0%, #f6f7fb 100%)",
+  fontFamily: "Inter, Arial, sans-serif",
+  color: "#0f172a",
 };
 
 const mainStyle = {
-  maxWidth: "650px",
+  maxWidth: "700px",
   margin: "0 auto",
-  padding: "45px 24px 60px",
+  padding: "34px 20px 65px",
 };
 
 const backButtonStyle = {
-  border: "none",
-  backgroundColor: "transparent",
-  padding: 0,
-  color: "#555",
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "7px",
+  padding: "10px 15px",
+  border: "1px solid #e2e8f0",
+  borderRadius: "999px",
+  backgroundColor: "rgba(255,255,255,0.9)",
+  color: "#475569",
   cursor: "pointer",
-  fontSize: "14px",
+  fontSize: "12px",
+  fontWeight: "750",
   marginBottom: "20px",
+  boxShadow: "0 5px 18px rgba(15,23,42,0.05)",
 };
 
 const paymentCardStyle = {
-  backgroundColor: "white",
-  padding: "40px",
-  borderRadius: "16px",
-  boxShadow:
-    "0 5px 25px rgba(0,0,0,0.07)",
+  position: "relative",
+  overflow: "hidden",
+  background:
+    "linear-gradient(145deg, rgba(255,255,255,0.99), rgba(248,250,255,0.97))",
+  padding: "42px 42px 34px",
+  border: "1px solid #e2e8f0",
+  borderRadius: "26px",
+  boxShadow: "0 25px 70px rgba(15,23,42,0.10)",
   textAlign: "center",
 };
 
 const paymentIconContainerStyle = {
-  width: "65px",
-  height: "65px",
-  margin: "0 auto 15px",
+  position: "relative",
+  width: "78px",
+  height: "78px",
+  margin: "0 auto 18px",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   borderRadius: "50%",
-  backgroundColor: "#f2f2f2",
-  fontSize: "30px",
+  background:
+    "linear-gradient(135deg, #2563eb, #4f46e5 50%, #7c3aed)",
+  color: "white",
+  fontSize: "34px",
+  boxShadow: "0 16px 35px rgba(79,70,229,0.25)",
 };
 
 const secureTextStyle = {
-  margin: "0 0 8px",
-  color: "#287a43",
-  fontSize: "11px",
-  fontWeight: "700",
-  letterSpacing: "1px",
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "6px",
+  margin: "0 0 9px",
+  padding: "6px 10px",
+  borderRadius: "999px",
+  backgroundColor: "#ecfdf5",
+  border: "1px solid #bbf7d0",
+  color: "#15803d",
+  fontSize: "9px",
+  fontWeight: "850",
+  letterSpacing: "0.8px",
 };
 
 const titleStyle = {
   margin: 0,
-  fontSize: "30px",
-  lineHeight: "1.2",
+  color: "#0f172a",
+  fontSize: "clamp(30px, 5vw, 38px)",
+  lineHeight: "1.1",
+  fontWeight: "900",
+  letterSpacing: "-1.4px",
 };
 
 const subtitleStyle = {
-  margin: "10px auto 25px",
-  maxWidth: "430px",
-  color: "#777",
-  fontSize: "14px",
-  lineHeight: "1.6",
+  margin: "11px auto 26px",
+  maxWidth: "460px",
+  color: "#64748b",
+  fontSize: "13px",
+  lineHeight: "1.65",
 };
 
 const amountBoxStyle = {
+  position: "relative",
+  overflow: "hidden",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  padding: "20px",
-  marginTop: "10px",
-  borderRadius: "10px",
-  backgroundColor: "#f5f5f5",
+  gap: "20px",
+  padding: "20px 21px",
+  marginTop: "8px",
+  borderRadius: "16px",
+  background:
+    "linear-gradient(135deg, #eef2ff, #f5f3ff)",
+  border: "1px solid #e0e7ff",
+  textAlign: "left",
 };
 
 const amountLabelStyle = {
-  color: "#666",
-  fontSize: "14px",
+  color: "#64748b",
+  fontSize: "11px",
+  fontWeight: "750",
+  textTransform: "uppercase",
+  letterSpacing: "0.5px",
 };
 
 const amountStyle = {
-  fontSize: "27px",
+  fontSize: "30px",
+  color: "#4f46e5",
+  fontWeight: "900",
+  letterSpacing: "-0.7px",
 };
 
 const orderInfoStyle = {
@@ -597,36 +645,43 @@ const orderInfoStyle = {
   alignItems: "center",
   gap: "20px",
   padding: "15px 0",
-  marginTop: "12px",
-  borderBottom: "1px solid #eee",
-  color: "#666",
-  fontSize: "13px",
+  marginTop: "13px",
+  borderBottom: "1px solid #e2e8f0",
+  color: "#64748b",
+  fontSize: "12px",
+  textAlign: "left",
 };
 
 const orderIdStyle = {
-  maxWidth: "280px",
+  maxWidth: "310px",
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
-  color: "#333",
+  color: "#334155",
+  fontSize: "11px",
+  fontWeight: "750",
 };
 
 const statusRowStyle = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
+  gap: "20px",
   padding: "15px 0",
-  color: "#666",
-  fontSize: "13px",
+  color: "#64748b",
+  fontSize: "12px",
+  textAlign: "left",
 };
 
 const pendingBadgeStyle = {
-  padding: "5px 10px",
-  borderRadius: "20px",
-  backgroundColor: "#fff4dc",
-  color: "#9a6500",
-  fontSize: "11px",
-  fontWeight: "700",
+  padding: "6px 11px",
+  borderRadius: "999px",
+  backgroundColor: "#fff7ed",
+  border: "1px solid #fed7aa",
+  color: "#c2410c",
+  fontSize: "10px",
+  fontWeight: "850",
+  letterSpacing: "0.3px",
 };
 
 const errorBoxStyle = {
@@ -634,26 +689,34 @@ const errorBoxStyle = {
   flexDirection: "column",
   gap: "5px",
   marginTop: "10px",
-  padding: "13px",
+  padding: "13px 14px",
   textAlign: "left",
-  backgroundColor: "#fff0f0",
-  color: "#a52828",
-  borderRadius: "8px",
-  fontSize: "13px",
+  backgroundColor: "#fff1f2",
+  border: "1px solid #fecdd3",
+  color: "#be123c",
+  borderRadius: "12px",
+  fontSize: "12px",
   lineHeight: "1.5",
 };
 
 const payButtonStyle = {
   width: "100%",
-  padding: "15px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "9px",
+  padding: "16px",
   marginTop: "20px",
   border: "none",
-  borderRadius: "9px",
-  backgroundColor: "#222",
+  borderRadius: "13px",
+  background:
+    "linear-gradient(135deg, #2563eb 0%, #4f46e5 48%, #7c3aed 100%)",
   color: "white",
-  fontSize: "16px",
-  fontWeight: "700",
+  fontSize: "15px",
+  fontWeight: "850",
   cursor: "pointer",
+  boxShadow: "0 11px 28px rgba(79,70,229,0.24)",
+  transition: "transform 0.2s ease, box-shadow 0.2s ease",
 };
 
 const disabledPayButtonStyle = {
@@ -665,79 +728,94 @@ const secondaryButtonStyle = {
   width: "100%",
   padding: "13px",
   marginTop: "10px",
-  border: "1px solid #ddd",
-  borderRadius: "9px",
+  border: "1px solid #dbe2ea",
+  borderRadius: "12px",
   backgroundColor: "white",
-  color: "#333",
-  fontSize: "14px",
+  color: "#475569",
+  fontSize: "13px",
+  fontWeight: "700",
   cursor: "pointer",
 };
 
 const trustSectionStyle = {
-  display: "flex",
-  justifyContent: "center",
-  gap: "20px",
-  flexWrap: "wrap",
-  marginTop: "25px",
-  paddingTop: "20px",
-  borderTop: "1px solid #eee",
+  display: "grid",
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gap: "10px",
+  marginTop: "27px",
+  paddingTop: "22px",
+  borderTop: "1px solid #e2e8f0",
 };
 
 const trustItemStyle = {
   display: "flex",
+  flexDirection: "column",
   alignItems: "center",
-  gap: "5px",
-  color: "#777",
-  fontSize: "11px",
+  justifyContent: "center",
+  gap: "7px",
+  minHeight: "65px",
+  padding: "8px",
+  borderRadius: "12px",
+  backgroundColor: "#f8fafc",
+  color: "#64748b",
+  fontSize: "10px",
+  fontWeight: "700",
 };
 
 const buttonStyle = {
   padding: "12px 22px",
   marginTop: "15px",
   border: "none",
-  borderRadius: "8px",
-  backgroundColor: "#222",
+  borderRadius: "11px",
+  background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
   color: "white",
   cursor: "pointer",
-  fontSize: "14px",
-  fontWeight: "600",
+  fontSize: "13px",
+  fontWeight: "750",
+  boxShadow: "0 8px 20px rgba(79,70,229,0.20)",
 };
 
 const centerStyle = {
-  minHeight: "80vh",
+  minHeight: "100vh",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   padding: "20px",
-  fontFamily:
-    "Inter, Arial, sans-serif",
+  fontFamily: "Inter, Arial, sans-serif",
+  background:
+    "radial-gradient(circle at top, rgba(99,102,241,0.12), transparent 35%), #f8fafc",
 };
 
 const loadingCardStyle = {
   textAlign: "center",
+  padding: "45px",
+  backgroundColor: "white",
+  border: "1px solid #e0e7ff",
+  borderRadius: "22px",
+  boxShadow: "0 18px 50px rgba(15,23,42,0.08)",
 };
 
 const loadingIconStyle = {
-  fontSize: "45px",
+  fontSize: "48px",
 };
 
 const errorCardStyle = {
   maxWidth: "450px",
   padding: "45px",
   textAlign: "center",
-  backgroundColor: "white",
-  borderRadius: "14px",
-  boxShadow:
-    "0 4px 20px rgba(0,0,0,0.08)",
+  background:
+    "linear-gradient(145deg, #ffffff, #f8faff)",
+  border: "1px solid #e0e7ff",
+  borderRadius: "22px",
+  boxShadow: "0 18px 50px rgba(15,23,42,0.09)",
 };
 
 const errorIconStyle = {
-  fontSize: "42px",
+  fontSize: "44px",
 };
 
 const mutedTextStyle = {
-  color: "#777",
-  lineHeight: "1.6",
+  color: "#64748b",
+  lineHeight: "1.65",
+  fontSize: "13px",
 };
-
 export default Payment;
