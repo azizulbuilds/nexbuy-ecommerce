@@ -784,7 +784,8 @@ const bottomRowStyle = {
   justifyContent: "space-between",
   alignItems: "center",
   gap: "10px",
-  marginTop: "18px",
+  marginTop: "auto",
+  paddingTop: "18px",
 };
 
 const priceStyle = {
@@ -818,7 +819,7 @@ const outOfStockTextStyle = {
 const buttonStyle = {
   width: "100%",
   padding: "13px",
-  marginTop: "auto",
+  marginTop: "18px",
   border: "none",
   borderRadius: "11px",
   background:
