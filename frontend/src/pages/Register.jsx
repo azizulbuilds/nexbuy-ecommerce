@@ -62,45 +62,134 @@ function Register() {
   };
 
   return (
-    <div style={pageStyle}>
+    <div className="nexbuy-register-page" style={pageStyle}>
+
+      <style>{`
+        .nexbuy-register-page,
+        .nexbuy-register-page * {
+          box-sizing: border-box;
+        }
+
+        .nexbuy-register-page input,
+        .nexbuy-register-page button {
+          max-width: 100%;
+        }
+
+        @media (max-width: 1050px) {
+          .nexbuy-register-page { grid-template-columns: minmax(320px, .85fr) minmax(420px, 1.15fr) !important; }
+          .nexbuy-register-hero { padding: 42px 38px 0 !important; }
+          .nexbuy-register-form-section { padding: 30px !important; }
+          .nexbuy-register-form-card { padding: 38px 32px !important; }
+        }
+
+        @media (max-width: 820px) {
+          .nexbuy-register-page { display: block !important; min-height: 100vh !important; }
+          .nexbuy-register-hero { min-height: auto !important; padding: 34px 24px 38px !important; display: block !important; }
+          .nexbuy-register-hero-content { max-width: 100% !important; }
+          .nexbuy-register-logo { font-size: 34px !important; }
+          .nexbuy-register-community { margin-top: 34px !important; }
+          .nexbuy-register-hero-title { font-size: clamp(38px, 9vw, 54px) !important; letter-spacing: -2px !important; }
+          .nexbuy-register-hero-description { font-size: 15px !important; line-height: 1.6 !important; max-width: 600px !important; }
+          .nexbuy-register-benefits { margin-top: 28px !important; gap: 16px !important; }
+          .nexbuy-register-shopping { height: 150px !important; margin-top: 26px !important; }
+          .nexbuy-register-shopping-glow { left: 50% !important; transform: translateX(-50%) !important; bottom: -105px !important; width: 330px !important; }
+          .nexbuy-register-bag { left: 50% !important; transform: translateX(-50%) perspective(500px) rotateX(3deg) !important; width: 185px !important; height: 125px !important; }
+          .nexbuy-register-bag-handle { width: 72px !important; height: 52px !important; top: -43px !important; left: 56px !important; border-width: 5px !important; }
+          .nexbuy-register-bag-logo { font-size: 24px !important; }
+          .nexbuy-register-floating-card { left: 50% !important; bottom: 4px !important; transform: translateX(-50%) !important; width: min(190px, 62vw) !important; padding: 10px !important; }
+          .nexbuy-register-form-section { min-height: auto !important; padding: 28px 18px 44px !important; align-items: flex-start !important; }
+          .nexbuy-register-form-card { max-width: 620px !important; padding: 32px 24px !important; border-radius: 20px !important; }
+          .nexbuy-register-form-title { font-size: clamp(27px, 7vw, 34px) !important; }
+        }
+
+        @media (max-width: 520px) {
+          .nexbuy-register-hero { padding: 27px 17px 30px !important; }
+          .nexbuy-register-logo { font-size: 31px !important; }
+          .nexbuy-register-tagline { font-size: 13px !important; }
+          .nexbuy-register-community { margin-top: 27px !important; padding: 8px 12px !important; font-size: 11px !important; }
+          .nexbuy-register-hero-title { margin-top: 20px !important; font-size: clamp(35px, 11vw, 46px) !important; line-height: 1.04 !important; }
+          .nexbuy-register-hero-description { margin-top: 18px !important; font-size: 14px !important; }
+          .nexbuy-register-benefits { margin-top: 23px !important; gap: 13px !important; }
+          .nexbuy-register-benefit { gap: 11px !important; }
+          .nexbuy-register-benefit-icon { width: 41px !important; height: 41px !important; font-size: 16px !important; }
+          .nexbuy-register-benefit-title { font-size: 12px !important; }
+          .nexbuy-register-benefit-description { font-size: 10px !important; }
+          .nexbuy-register-shopping { height: 125px !important; margin-top: 22px !important; }
+          .nexbuy-register-bag { width: 150px !important; height: 102px !important; bottom: 0 !important; }
+          .nexbuy-register-bag-handle { width: 62px !important; height: 46px !important; top: -38px !important; left: 44px !important; border-width: 4px !important; }
+          .nexbuy-register-bag-logo { font-size: 20px !important; }
+          .nexbuy-register-floating-card { display: none !important; }
+          .nexbuy-register-form-section { padding: 18px 12px 32px !important; }
+          .nexbuy-register-form-card { width: 100% !important; padding: 27px 18px !important; border-radius: 18px !important; box-shadow: 0 16px 45px rgba(15,23,42,.08) !important; }
+          .nexbuy-register-form-header { margin-bottom: 25px !important; }
+          .nexbuy-register-form-title { font-size: 27px !important; letter-spacing: -.8px !important; line-height: 1.15 !important; }
+          .nexbuy-register-form-subtitle { font-size: 12px !important; line-height: 1.5 !important; }
+          .nexbuy-register-field { margin-bottom: 16px !important; }
+          .nexbuy-register-password-row { gap: 8px !important; align-items: flex-start !important; }
+          .nexbuy-register-password-hint { text-align: right !important; line-height: 1.2 !important; }
+          .nexbuy-register-input-wrapper { min-height: 50px !important; }
+          .nexbuy-register-input-icon { width: 43px !important; font-size: 16px !important; }
+          .nexbuy-register-input, .nexbuy-register-password-input { min-width: 0 !important; font-size: 14px !important; }
+          .nexbuy-register-password-toggle { width: 43px !important; height: 46px !important; }
+          .nexbuy-register-security { align-items: flex-start !important; gap: 10px !important; padding: 12px !important; margin-top: 4px !important; }
+          .nexbuy-register-security-icon { width: 36px !important; height: 36px !important; }
+          .nexbuy-register-security-title { font-size: 11px !important; }
+          .nexbuy-register-security-text { font-size: 9px !important; }
+          .nexbuy-register-button { min-height: 50px !important; padding: 13px !important; font-size: 14px !important; }
+          .nexbuy-register-or { margin: 22px 0 15px !important; }
+          .nexbuy-register-login-text { font-size: 12px !important; line-height: 1.5 !important; }
+          .nexbuy-register-trust { gap: 15px !important; margin-top: 24px !important; }
+          .nexbuy-register-trust-divider { height: 30px !important; }
+        }
+
+        @media (max-width: 360px) {
+          .nexbuy-register-hero { padding-left: 13px !important; padding-right: 13px !important; }
+          .nexbuy-register-form-section { padding-left: 8px !important; padding-right: 8px !important; }
+          .nexbuy-register-form-card { padding-left: 14px !important; padding-right: 14px !important; }
+          .nexbuy-register-form-title { font-size: 25px !important; }
+          .nexbuy-register-password-hint { font-size: 8px !important; }
+          .nexbuy-register-trust { gap: 10px !important; }
+        }
+      `}</style>
       {/* ==========================================
           LEFT — BRAND / HERO SECTION
       ========================================== */}
 
-      <section style={heroSectionStyle}>
+      <section className="nexbuy-register-hero" style={heroSectionStyle}>
         <div style={heroGlowTopStyle} />
         <div style={heroGlowBottomStyle} />
 
-        <div style={heroContentStyle}>
+        <div className="nexbuy-register-hero-content" style={heroContentStyle}>
           {/* Logo */}
 
           <button
             onClick={() => navigate("/")}
+            className="nexbuy-register-logo"
             style={logoStyle}
           >
             Nex<span>buy</span>
           </button>
 
-          <p style={taglineStyle}>
+          <p className="nexbuy-register-tagline" style={taglineStyle}>
             Shop Smarter. Live Better.
           </p>
 
           {/* Community Badge */}
 
-          <div style={communityBadgeStyle}>
+          <div className="nexbuy-register-community" style={communityBadgeStyle}>
             <span>✦</span>
             Join Our Community
           </div>
 
           {/* Hero Heading */}
 
-          <h1 style={heroTitleStyle}>
+          <h1 className="nexbuy-register-hero-title" style={heroTitleStyle}>
             Start Your
             <br />
             <span>Nexbuy</span> Journey
           </h1>
 
-          <p style={heroDescriptionStyle}>
+          <p className="nexbuy-register-hero-description" style={heroDescriptionStyle}>
             Create an account and get access to
             exclusive products, fast checkout,
             order tracking and more.
@@ -108,7 +197,7 @@ function Register() {
 
           {/* Benefits */}
 
-          <div style={benefitsStyle}>
+          <div className="nexbuy-register-benefits" style={benefitsStyle}>
             <Benefit
               icon="🚚"
               title="Fast & Secure Shopping"
@@ -137,18 +226,18 @@ function Register() {
 
         {/* Decorative Shopping Area */}
 
-        <div style={shoppingDecorationStyle}>
-          <div style={shoppingGlowStyle} />
+        <div className="nexbuy-register-shopping" style={shoppingDecorationStyle}>
+          <div className="nexbuy-register-shopping-glow" style={shoppingGlowStyle} />
 
-          <div style={shoppingBagStyle}>
-            <div style={bagHandleStyle} />
+          <div className="nexbuy-register-bag" style={shoppingBagStyle}>
+            <div className="nexbuy-register-bag-handle" style={bagHandleStyle} />
 
-            <div style={bagLogoStyle}>
+            <div className="nexbuy-register-bag-logo" style={bagLogoStyle}>
               Nex<span>buy</span>
             </div>
           </div>
 
-          <div style={floatingCardStyle}>
+          <div className="nexbuy-register-floating-card" style={floatingCardStyle}>
             <div style={floatingHeartStyle}>
               ♥
             </div>
@@ -171,20 +260,20 @@ function Register() {
           RIGHT — REGISTER FORM
       ========================================== */}
 
-      <section style={formSectionStyle}>
-        <div style={formCardStyle}>
+      <section className="nexbuy-register-form-section" style={formSectionStyle}>
+        <div className="nexbuy-register-form-card" style={formCardStyle}>
           {/* Heading */}
 
-          <div style={formHeaderStyle}>
-            <div style={formBadgeStyle}>
+          <div className="nexbuy-register-form-header" style={formHeaderStyle}>
+            <div className="nexbuy-register-form-badge" style={formBadgeStyle}>
               ✦ Join Nexbuy
             </div>
 
-            <h2 style={formTitleStyle}>
+            <h2 className="nexbuy-register-form-title" style={formTitleStyle}>
               Create Your Account
             </h2>
 
-            <p style={formSubtitleStyle}>
+            <p className="nexbuy-register-form-subtitle" style={formSubtitleStyle}>
               Join Nexbuy and start your shopping
               journey today!
             </p>
@@ -195,13 +284,13 @@ function Register() {
           <form onSubmit={handleSubmit}>
             {/* Name */}
 
-            <div style={fieldGroupStyle}>
+            <div className="nexbuy-register-field" style={fieldGroupStyle}>
               <label style={labelStyle}>
                 Full Name
               </label>
 
-              <div style={inputWrapperStyle}>
-                <span style={inputIconStyle}>
+              <div className="nexbuy-register-input-wrapper" style={inputWrapperStyle}>
+                <span className="nexbuy-register-input-icon" style={inputIconStyle}>
                   ♙
                 </span>
 
@@ -213,6 +302,7 @@ function Register() {
                   onChange={handleChange}
                   required
                   autoComplete="name"
+                  className="nexbuy-register-input"
                   style={inputStyle}
                   onFocus={(e) => {
                     e.currentTarget.parentElement.style.borderColor =
@@ -234,13 +324,13 @@ function Register() {
 
             {/* Email */}
 
-            <div style={fieldGroupStyle}>
+            <div className="nexbuy-register-field" style={fieldGroupStyle}>
               <label style={labelStyle}>
                 Email Address
               </label>
 
-              <div style={inputWrapperStyle}>
-                <span style={inputIconStyle}>
+              <div className="nexbuy-register-input-wrapper" style={inputWrapperStyle}>
+                <span className="nexbuy-register-input-icon" style={inputIconStyle}>
                   ✉
                 </span>
 
@@ -252,6 +342,7 @@ function Register() {
                   onChange={handleChange}
                   required
                   autoComplete="email"
+                  className="nexbuy-register-input"
                   style={inputStyle}
                   onFocus={(e) => {
                     e.currentTarget.parentElement.style.borderColor =
@@ -273,8 +364,9 @@ function Register() {
 
             {/* Password */}
 
-            <div style={fieldGroupStyle}>
+            <div className="nexbuy-register-field" style={fieldGroupStyle}>
               <div
+                className="nexbuy-register-password-row"
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -285,13 +377,13 @@ function Register() {
                   Password
                 </label>
 
-                <span style={passwordHintStyle}>
+                <span className="nexbuy-register-password-hint" style={passwordHintStyle}>
                   8+ characters recommended
                 </span>
               </div>
 
-              <div style={inputWrapperStyle}>
-                <span style={inputIconStyle}>
+              <div className="nexbuy-register-input-wrapper" style={inputWrapperStyle}>
+                <span className="nexbuy-register-input-icon" style={inputIconStyle}>
                   🔒
                 </span>
 
@@ -308,6 +400,7 @@ function Register() {
                   required
                   minLength={6}
                   autoComplete="new-password"
+                  className="nexbuy-register-password-input"
                   style={passwordInputStyle}
                   onFocus={(e) => {
                     e.currentTarget.parentElement.style.borderColor =
@@ -330,6 +423,7 @@ function Register() {
                   onClick={() =>
                     setShowPassword(!showPassword)
                   }
+                  className="nexbuy-register-password-toggle"
                   style={passwordToggleStyle}
                   aria-label={
                     showPassword
@@ -344,17 +438,17 @@ function Register() {
 
             {/* Security Notice */}
 
-            <div style={securityBoxStyle}>
-              <div style={securityIconStyle}>
+            <div className="nexbuy-register-security" style={securityBoxStyle}>
+              <div className="nexbuy-register-security-icon" style={securityIconStyle}>
                 ✓
               </div>
 
               <div>
-                <strong style={securityTitleStyle}>
+                <strong className="nexbuy-register-security-title" style={securityTitleStyle}>
                   Your account is protected
                 </strong>
 
-                <p style={securityTextStyle}>
+                <p className="nexbuy-register-security-text" style={securityTextStyle}>
                   Your account information is handled
                   securely throughout registration.
                 </p>
@@ -380,6 +474,7 @@ function Register() {
             <button
               type="submit"
               disabled={loading}
+              className="nexbuy-register-button"
               style={{
                 ...registerButtonStyle,
                 ...(loading
@@ -423,13 +518,13 @@ function Register() {
 
           {/* Login */}
 
-          <div style={orContainerStyle}>
+          <div className="nexbuy-register-or" style={orContainerStyle}>
             <span style={lineStyle} />
             <span style={orTextStyle}>OR</span>
             <span style={lineStyle} />
           </div>
 
-          <p style={loginTextStyle}>
+          <p className="nexbuy-register-login-text" style={loginTextStyle}>
             Already have an account?{" "}
             <button
               type="button"
@@ -442,20 +537,20 @@ function Register() {
 
           {/* Trust Features */}
 
-          <div style={trustFeaturesStyle}>
+          <div className="nexbuy-register-trust" style={trustFeaturesStyle}>
             <TrustFeature
               icon="✓"
               label="Secure"
             />
 
-            <div style={trustDividerStyle} />
+            <div className="nexbuy-register-trust-divider" style={trustDividerStyle} />
 
             <TrustFeature
               icon="ϟ"
               label="Fast"
             />
 
-            <div style={trustDividerStyle} />
+            <div className="nexbuy-register-trust-divider" style={trustDividerStyle} />
 
             <TrustFeature
               icon="♡"
@@ -478,17 +573,17 @@ function Benefit({
   description,
 }) {
   return (
-    <div style={benefitStyle}>
-      <div style={benefitIconStyle}>
+    <div className="nexbuy-register-benefit" style={benefitStyle}>
+      <div className="nexbuy-register-benefit-icon" style={benefitIconStyle}>
         {icon}
       </div>
 
       <div>
-        <strong style={benefitTitleStyle}>
+        <strong className="nexbuy-register-benefit-title" style={benefitTitleStyle}>
           {title}
         </strong>
 
-        <p style={benefitDescriptionStyle}>
+        <p className="nexbuy-register-benefit-description" style={benefitDescriptionStyle}>
           {description}
         </p>
       </div>
