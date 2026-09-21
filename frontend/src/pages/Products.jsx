@@ -680,6 +680,9 @@ const gridStyle = {
 
 const cardStyle = {
   position: "relative",
+  display: "flex",
+  flexDirection: "column",
+  height: "100%",
   backgroundColor: "rgba(255,255,255,0.96)",
   border: "1px solid rgba(226,232,240,0.90)",
   borderRadius: "20px",
@@ -739,6 +742,10 @@ const outOfStockBadgeStyle = {
 };
 
 const cardContentStyle = {
+  display: "flex",
+  flexDirection: "column",
+  flex: 1,
+  minHeight: 0,
   padding: "21px",
 };
 
@@ -811,7 +818,7 @@ const outOfStockTextStyle = {
 const buttonStyle = {
   width: "100%",
   padding: "13px",
-  marginTop: "18px",
+  marginTop: "auto",
   border: "none",
   borderRadius: "11px",
   background:
