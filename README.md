@@ -4,6 +4,10 @@
 
 ---
 
+🌐 Live Demo
+
+Vercel Deployment: https://nexbuy-ecommerce-two.vercel.app
+
 ## 🚀 Overview
 
 **Nexbuy** is a full-stack e-commerce application designed to provide a complete online shopping experience.
@@ -832,29 +836,6 @@ Possible improvements for production-scale workloads:
 * Admin analytics
 * Notifications
 * Improved mobile UI
-
----
-
-# 📸 Screenshots
-
-Recommended screenshots for the repository:
-
-```text
-screenshots/
-├── home.png
-├── products.png
-├── product-details.png
-├── cart.png
-├── checkout.png
-├── orders.png
-└── admin-dashboard.png
-```
-
-Example:
-
-```markdown
-![Nexbuy Home](screenshots/home.png)
-```
 
 ---
 
