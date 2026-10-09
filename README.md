@@ -6,7 +6,7 @@
 
 🌐 Live Demo
 
-Vercel Deployment: https://nexbuy-ecommerce-two.vercel.app
+Vercel Deployment: https://nexbuy-ecommerce-virid.vercel.app
 
 ## 🚀 Overview
 
