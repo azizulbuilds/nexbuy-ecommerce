@@ -855,7 +855,8 @@ If you find this project useful, consider giving the repository a ⭐ on GitHub.
 
 ## 📄 License
 
-This project is created for learning, portfolio, and educational purposes.
+This project is licensed under the MIT License.
+See the [LICENSE](LICENSE) file for details.
 
 ```
 ```
